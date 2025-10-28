@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="dirigenti" namespace="/Dirigenza/Dipendenti/Dirigente" extends="dirigente">
+        <action name="Inserisci" class="pwm.penna.action.amministrazione.dirigente.dipendenti.dirigente.inserisci.DirigenteInserisci">
+            <result>/WEB-INF/Amministrazione/Dirigenza/Dipendenti/Dirigente/inserisci.jsp</result>
+        </action>
+        
+        <action name="Crea" class="pwm.penna.action.amministrazione.dirigente.dipendenti.dirigente.inserisci.DirigenteCrea">
+            <result name="success" type="redirectAction">Lista</result>
+            <result name="input">/WEB-INF/Amministrazione/Dirigenza/Dipendenti/Dirigente/inserisci.jsp</result>
+        </action>
+        
+        <action name="Modifica" class="pwm.penna.action.amministrazione.dirigente.dipendenti.dirigente.modifica.DirigenteModifica">
+            <result name="input">/WEB-INF/Amministrazione/Dirigenza/Dipendenti/Dirigente/modifica.jsp</result>
+        </action>
+        
+        <action name="Aggiorna" class="pwm.penna.action.amministrazione.dirigente.dipendenti.dirigente.modifica.DirigenteAggiorna">
+            <result name="success" type="redirectAction">Lista</result>
+            <result name="input">/WEB-INF/Amministrazione/Dirigenza/Dipendenti/Dirigente/modifica.jsp</result>
+        </action>
+        
+        <action name="Cancella" class="pwm.penna.action.amministrazione.dirigente.dipendenti.dirigente.cancella.DirigenteCancella">
+            <result name="success" type="redirectAction">Lista</result>
+        </action>
+        
+        <action name="Lista" class="pwm.penna.action.amministrazione.dirigente.dipendenti.dirigente.lista.DirigenteLista">
+            <result>/WEB-INF/Amministrazione/Dirigenza/Dipendenti/Dirigente/visualizza.jsp</result>
+        </action>
+        
+        <action name="">
+            <result type="redirectAction">Lista</result>
+        </action>
+    </package>
+</struts>

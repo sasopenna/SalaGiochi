@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="test" name="pwm.penna.pojo.dipendente.Dipendente" optimistic-lock="none" table="dipendente">
+        <id name="idDipendente" type="java.lang.Integer">
+            <column name="ID_Dipendente"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="pwm.penna.pojo.profilo.Profilo" fetch="select" name="profilo" cascade="all" lazy="false">
+            <column length="100" name="Email" not-null="true" unique="true"/>
+        </many-to-one>
+        <property name="salario" type="big_decimal">
+            <column name="Salario" not-null="true" precision="9" scale="2"/>
+        </property>
+        <property name="inizioTurno" type="time">
+            <column length="8" name="InizioTurno" not-null="true"/>
+        </property>
+        <property name="fineTurno" type="time">
+            <column length="8" name="FineTurno" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

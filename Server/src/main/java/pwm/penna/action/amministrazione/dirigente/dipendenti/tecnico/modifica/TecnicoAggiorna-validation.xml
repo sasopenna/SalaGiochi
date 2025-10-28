@@ -1,0 +1,163 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- campi: tecnico.idDipendente tecnico.nome tecnico.cognome tecnico.dataDiNascita tecnico.codiceFiscale tecnico.cellulare tecnico.email tecnico.via tecnico.numeroCivico tecnico.citta tecnico.cap tecnico.inizioTurno tecnico.fineTurno tecnico.salario -->
+	<!-- il campo datadinascita lo valida di "default" struts -->
+	
+	<field name="tecnico.idDipendente">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+
+	<field name="tecnico.profilo.nome">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">50</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+
+	<field name="tecnico.profilo.cognome">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">50</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	<field name="tecnico.profilo.codiceFiscale">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="cf">
+			<message key="validator.cf" />
+		</field-validator>
+	</field>
+	
+	<field name="tecnico.profilo.sesso">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="gender">
+			<message key="validator.gender" />
+		</field-validator>
+	</field>
+	
+	<field name="tecnico.profilo.telefono">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="long">
+			<param name="min">3000000000</param>
+			<param name="max">3999999999</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="tecnico.profilo.email">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="email">
+			<message key="validator.email" />
+		</field-validator>
+	</field>
+	
+	<field name="tecnico.salario">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="double">
+			<param name="minInclusive">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="tecnico.profilo.via">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="tecnico.profilo.numeroCivico">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">14500</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="tecnico.profilo.citta">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="tecnico.profilo.cap">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">99999</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	<field name="tecnico.specializzazione">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="ddg">
+			<message key="validator.ddg" />
+		</field-validator>
+	</field>
+	
+	<field name="tecnico.inizioTurno">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+	
+	<field name="tecnico.fineTurno">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+</validators>

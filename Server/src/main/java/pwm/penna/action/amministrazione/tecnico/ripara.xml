@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="tecnico_ripara" namespace="/Tecnico" extends="tecnico">
+        <action name="Ripara" class="pwm.penna.action.amministrazione.tecnico.RiparaInserisci">
+            <result>/WEB-INF/Amministrazione/tecnico.jsp</result>
+        </action>
+        
+        <action name="Crea" class="pwm.penna.action.amministrazione.tecnico.RiparaCrea">
+            <result name="success" type="redirectAction">Ripara</result>
+            <result name="input">/WEB-INF/Amministrazione/tecnico.jsp</result>
+        </action>
+        
+        <action name="">
+            <result type="redirectAction">Ripara</result>
+        </action>
+    </package>
+</struts>

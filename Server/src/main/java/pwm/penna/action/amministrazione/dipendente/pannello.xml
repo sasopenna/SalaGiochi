@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="amministrazione" namespace="/Amministrazione" extends="dipendente">
+		<action name="CambiaFoto" class="pwm.penna.action.account.profilo.CambiaFoto">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/jpeg</param>
+			</interceptor-ref>
+     		<interceptor-ref name="dipendenteStack"/>
+     		<interceptor-ref name="token"/>
+     		<interceptor-ref name="execAndWait"/>
+     		
+     		<result name="invalid.token" type="redirectAction">Pannello</result>
+     		<result name="input" type="redirectAction">Pannello</result>
+     		<result name="wait">/WEB-INF/Amministrazione/pannello-execandwait.jsp</result>
+    		<result name="success" type="redirectAction">Pannello</result>
+		</action>
+	
+		<action name="Pannello" class="pwm.penna.action.amministrazione.dipendente.Pannello">
+			<result>/WEB-INF/Amministrazione/pannello.jsp</result>
+		</action>
+		
+		<action name="">
+			<result type="redirectAction">Pannello</result>
+		</action>
+	</package>
+</struts>

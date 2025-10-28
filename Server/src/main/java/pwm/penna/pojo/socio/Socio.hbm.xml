@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="test" name="pwm.penna.pojo.socio.Socio" optimistic-lock="none" table="socio">
+        <id name="numeroCliente" type="java.lang.Integer">
+            <column name="NumeroCliente"/>
+			<generator class="foreign" >
+				<param name="property">cliente</param>
+			</generator>
+        </id>
+        <many-to-one class="pwm.penna.pojo.profilo.Profilo" fetch="select" name="profilo" cascade="all" lazy="false">
+            <column length="100" name="Email" not-null="true" unique="true"/>
+        </many-to-one>
+        <property name="punteggio" type="int">
+            <column name="Punteggio" not-null="true"/>
+        </property>
+        <property name="membroDal" type="date">
+            <column length="10" name="MembroDal" not-null="true"/>
+        </property>
+        
+        <one-to-one class="pwm.penna.pojo.cliente.Cliente" name="cliente" lazy="false"/>
+    </class>
+</hibernate-mapping>

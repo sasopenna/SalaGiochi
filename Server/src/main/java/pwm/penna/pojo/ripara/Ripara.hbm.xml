@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="test" name="pwm.penna.pojo.ripara.Ripara" optimistic-lock="none" table="ripara">
+        <id name="progressivo" type="int">
+			<column name="Progressivo"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="pwm.penna.pojo.dispositivodigioco.DispositivoDiGioco" fetch="select" insert="true" name="dispositivoDiGioco">
+            <column name="DispositivoDiGioco" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pwm.penna.pojo.tecnico.Tecnico" fetch="select" insert="true" name="tecnico">
+            <column name="Tecnico" not-null="true"/>
+        </many-to-one>
+        <property name="costoRiparazione" type="big_decimal">
+            <column name="CostoRiparazione" not-null="true" precision="5" scale="2"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="test" name="pwm.penna.pojo.dispositivodigioco.DispositivoDiGioco" optimistic-lock="none" table="dispositivo_di_gioco">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID"/>
+            <generator class="identity"/>
+        </id>
+        <discriminator column="Tipo" type="string"/>
+        <property name="dataAcquisizione" type="date">
+            <column length="10" name="DataAcquisizione" not-null="true"/>
+        </property>
+        <one-to-one class="pwm.penna.pojo.postazione.Postazione" name="postazione" property-ref="dispositivoDiGioco" constrained="true"/>
+        <set fetch="select" inverse="true" lazy="true" name="riparazioni" table="ripara">
+            <key>
+                <column name="DispositivoDiGioco" not-null="true"/>
+            </key>
+            <one-to-many class="pwm.penna.pojo.ripara.Ripara"/>
+        </set>
+        
+        <subclass name="pwm.penna.pojo.dispositivodigioco.tipo.PC" discriminator-value="PC">
+			<property name="windows" column="Windows" type="string" />
+        </subclass>
+        <subclass name="pwm.penna.pojo.dispositivodigioco.tipo.Xbox" discriminator-value="Xbox">
+			<property name="generazione" column="Generazione" type="string" />
+        </subclass>
+        <subclass name="pwm.penna.pojo.dispositivodigioco.tipo.PlayStation" discriminator-value="PlayStation">
+			<property name="generazione" column="Generazione" type="string" />
+        </subclass>
+    </class>
+</hibernate-mapping>

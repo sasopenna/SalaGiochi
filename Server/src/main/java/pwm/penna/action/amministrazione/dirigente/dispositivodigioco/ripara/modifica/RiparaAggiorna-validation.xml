@@ -1,0 +1,37 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- campi: ripara.progressivo ripara.tecnico.idDipendente ripara.dispositivoDiGioco.id ripara.costoRiparazione -->
+	
+	<field name="ripara.progressivo">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="ripara.tecnico.idDipendente">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+	
+	<field name="ripara.dispositivoDiGioco.id">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+	
+	<field name="ripara.costoRiparazione">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="double">
+			<param name="minInclusive">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+</validators>

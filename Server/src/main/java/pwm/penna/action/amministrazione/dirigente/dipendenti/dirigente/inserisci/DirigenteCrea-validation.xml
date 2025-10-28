@@ -1,0 +1,165 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- campi: dirigente.nome dirigente.cognome dirigente.dataDiNascita dirigente.codiceFiscale dirigente.cellulare dirigente.email dirigente.via dirigente.numeroCivico dirigente.citta dirigente.cap dirigente.salario dirigente.periodo dirigente.esperienza dirigente.inizioTurno dirigente.fineTurno7 -->
+	<!-- il campo datadinascita lo valida di "default" struts -->
+
+	<field name="dirigente.profilo.nome">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">50</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+
+	<field name="dirigente.profilo.cognome">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">50</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	<field name="dirigente.profilo.sesso">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="gender">
+			<message key="validator.gender" />
+		</field-validator>
+	</field>
+	
+	<field name="dirigente.profilo.telefono">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="long">
+			<param name="min">3000000000</param>
+			<param name="max">3999999999</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="dirigente.profilo.email">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="email">
+			<message key="validator.email" />
+		</field-validator>
+	</field>
+	
+	<field name="dirigente.salario">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="double">
+			<param name="minInclusive">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="dirigente.periodo">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="dirigente.esperienza">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="dirigente.profilo.codiceFiscale">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="cf">
+			<message key="validator.cf" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="dirigente.profilo.via">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="dirigente.profilo.numeroCivico">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">14500</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="dirigente.profilo.citta">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="dirigente.profilo.cap">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">99999</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	<field name="dirigente.inizioTurno">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+	
+	<field name="dirigente.fineTurno">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+</validators>

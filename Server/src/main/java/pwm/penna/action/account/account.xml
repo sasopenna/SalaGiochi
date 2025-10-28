@@ -1,0 +1,54 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN" "https://struts.apache.org/dtds/struts-6.0.dtd">
+
+<struts>
+    <package name="account" namespace="/Account" extends="socio">
+		<action name="CercaPostazione" class="pwm.penna.action.account.richiedi.CercaPostazione">
+			<result type="json" name="success">
+				<param name="excludeProperties">
+					result.*.dispositivoDiGioco,
+					result.*.richieste,
+					result.*.salaGiochi
+				</param>
+			</result>
+		</action>
+		
+		<action name="Richiesta" class="pwm.penna.action.account.richiedi.Richiesta">
+     		<result name="input">/WEB-INF/Account/richiedi.jsp</result>
+    		<result name="success" type="redirectAction">Prenotazioni</result>
+		</action>
+		
+		<action name="Richiedi" class="pwm.penna.action.account.richiedi.Richiedi">
+			<result>/WEB-INF/Account/richiedi.jsp</result>
+		</action>
+		
+		<action name="CambiaFoto" class="pwm.penna.action.account.profilo.CambiaFoto">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/jpeg</param>
+			</interceptor-ref>
+     		<interceptor-ref name="socioStack"/>
+     		<interceptor-ref name="token"/>
+     		<interceptor-ref name="execAndWait"/>
+     		
+     		<result name="invalid.token">/WEB-INF/Account/profile.jsp</result>
+     		<result name="input">/WEB-INF/Account/profile.jsp</result>
+     		<result name="wait">/WEB-INF/Account/profile-execandwait.jsp</result>
+    		<result name="success" type="redirectAction">Profilo</result>
+		</action>
+		
+		<action name="Profilo" class="pwm.penna.action.account.profilo.Profilo">
+			<result>/WEB-INF/Account/profile.jsp</result>
+		</action>
+		
+		<action name="Prenotazioni" class="pwm.penna.action.account.prenotazioni.Prenotazioni">
+			<result>/WEB-INF/Account/prenotazioni.jsp</result>
+		</action>
+		
+		<action name="Pannello" class="pwm.penna.action.account.pannello.Pannello">
+			<result>/WEB-INF/Account/pannello.jsp</result>
+		</action>
+		
+		<action name="">
+			<result type="redirectAction">Pannello</result>
+		</action>
+	</package>
+</struts>

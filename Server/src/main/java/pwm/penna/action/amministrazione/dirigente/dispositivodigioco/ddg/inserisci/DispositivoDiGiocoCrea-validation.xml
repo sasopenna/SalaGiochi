@@ -1,0 +1,15 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- campi: dispositivoDiGioco.tipo dispositivoDiGioco.dataAcquisizione -->
+	<!-- il campo dataAcquisizione lo valida di "default" struts -->
+	
+	<field name="tipo">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="ddg">
+			<message key="validator.ddg" />
+		</field-validator>
+	</field>
+</validators>

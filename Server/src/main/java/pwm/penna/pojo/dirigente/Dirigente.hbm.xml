@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <joined-subclass catalog="test" name="pwm.penna.pojo.dirigente.Dirigente" table="dirigente" extends="pwm.penna.pojo.dipendente.Dipendente">
+		<key>
+			<column name="ID_Dipendente" />
+		</key>
+        <property name="esperienza" type="int">
+            <column name="Esperienza" not-null="true"/>
+        </property>
+        <property name="periodo" type="int">
+            <column name="Periodo" not-null="true"/>
+        </property>
+        <set name="sale" table="dirigente_salagiochi" lazy="false" cascade="save-update">
+			<key column="Dirigente" />
+			<many-to-many column="SalaGiochi" class="pwm.penna.pojo.salagiochi.SalaGiochi" />
+		</set>
+	</joined-subclass>
+</hibernate-mapping>

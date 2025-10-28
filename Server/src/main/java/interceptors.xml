@@ -1,0 +1,89 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN" "https://struts.apache.org/dtds/struts-6.0.dtd">
+<struts>		 
+	<package name="default" extends="struts-default,json-default" >
+	    <interceptors>
+			<interceptor name="storeInterceptor" class="pwm.penna.utils.interceptors.CustomMessageStoreInterceptor" />
+			<interceptor name="authenticationInterceptor" class="pwm.penna.utils.interceptors.AuthenticationInterceptor" />
+			<interceptor name="authenticationSocioInterceptor" class="pwm.penna.utils.interceptors.AuthenticationSocioInterceptor" />
+			<interceptor name="authenticationDipendenteInterceptor" class="pwm.penna.utils.interceptors.AuthenticationDipendenteInterceptor" />
+			<interceptor name="authenticationDirigenteInterceptor" class="pwm.penna.utils.interceptors.AuthenticationDirigenteInterceptor" />
+			<interceptor name="authenticationCassiereInterceptor" class="pwm.penna.utils.interceptors.AuthenticationCassiereInterceptor" />
+			<interceptor name="authenticationTecnicoInterceptor" class="pwm.penna.utils.interceptors.AuthenticationTecnicoInterceptor" />
+
+			<interceptor-stack name="customStack">
+				<interceptor-ref name="storeInterceptor" /> 
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="socioStack">
+				<interceptor-ref name="storeInterceptor" /> 
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="authenticationSocioInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="dipendenteStack">
+				<interceptor-ref name="storeInterceptor" /> 
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="authenticationDipendenteInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="dirigenteStack">
+				<interceptor-ref name="storeInterceptor" /> 
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="authenticationDipendenteInterceptor" />
+				<interceptor-ref name="authenticationDirigenteInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="cassiereStack">
+				<interceptor-ref name="storeInterceptor" /> 
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="authenticationDipendenteInterceptor" />
+				<interceptor-ref name="authenticationCassiereInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="tecnicoStack">
+				<interceptor-ref name="storeInterceptor" /> 
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="authenticationDipendenteInterceptor" />
+				<interceptor-ref name="authenticationTecnicoInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+    	<default-interceptor-ref name="customStack"/>
+    	
+		<global-results>
+			<result name="login" type="redirect">/Login.action</result>
+			<result name="error" type="redirect">/Home.action</result>
+			<result name="exception">/WEB-INF/errore.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception" />
+		</global-exception-mappings>
+	</package>
+	
+	<package name="socio" extends="default" >
+    	<default-interceptor-ref name="socioStack"/>
+	</package>
+	
+	<package name="dipendente" extends="default" >
+    	<default-interceptor-ref name="dipendenteStack"/>
+	</package>
+	
+	<package name="dirigente" extends="default" >
+    	<default-interceptor-ref name="dirigenteStack"/>
+	</package>
+	
+	<package name="cassiere" extends="default" >
+    	<default-interceptor-ref name="cassiereStack"/>
+	</package>
+	
+	<package name="tecnico" extends="default" >
+    	<default-interceptor-ref name="tecnicoStack"/>
+	</package>
+</struts>

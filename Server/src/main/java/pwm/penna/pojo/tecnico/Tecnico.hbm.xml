@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<joined-subclass catalog="test" name="pwm.penna.pojo.tecnico.Tecnico" table="tecnico" extends="pwm.penna.pojo.dipendente.Dipendente">
+		<key>
+			<column name="ID_Dipendente" />
+		</key>
+        <property name="specializzazione" type="string">
+            <column name="Specializzazione" not-null="true"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="riparazioni" table="ripara">
+            <key>
+                <column name="Tecnico" not-null="true"/>
+            </key>
+            <one-to-many class="pwm.penna.pojo.ripara.Ripara"/>
+        </set>
+	</joined-subclass>
+</hibernate-mapping>

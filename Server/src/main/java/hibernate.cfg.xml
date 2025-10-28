@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.serverTimezone">Europe/Rome</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test</property>
+        <property name="hibernate.connection.useSSL">false</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">none</property>
+        <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        
+        <mapping resource="pwm/penna/pojo/account/Account.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/profilo/Profilo.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/cliente/Cliente.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/dipendente/Dipendente.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/richiede/Richiede.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/salagiochi/SalaGiochi.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/socio/Socio.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/dirigente/Dirigente.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/postazione/Postazione.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/ripara/Ripara.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/tecnico/Tecnico.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/assegna/Assegna.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/cassiere/Cassiere.hbm.xml"/>
+        <mapping resource="pwm/penna/pojo/dispositivodigioco/DispositivoDiGioco.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

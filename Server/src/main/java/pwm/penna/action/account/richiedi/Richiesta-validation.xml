@@ -1,0 +1,61 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- campi: richiesta.cliente.numeroCliente richiesta.postazione.id.codiceSalaGiochi  richiesta.durata  richiesta.postazione.numero richiesta.postazione.id.stanza richiesta.postazione.id.posto -->
+
+	<field name="richiesta.cliente.numeroCliente">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="richiesta.postazione.numero">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="richiesta.postazione.id.codiceSalaGiochi">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="richiesta.postazione.id.stanza">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="richiesta.postazione.id.posto">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="richiesta.durata">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+</validators>

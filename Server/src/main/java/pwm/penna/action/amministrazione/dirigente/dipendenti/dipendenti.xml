@@ -1,0 +1,7 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN" "https://struts.apache.org/dtds/struts-6.0.dtd">
+
+<struts>
+    <include file="pwm/penna/action/amministrazione/dirigente/dipendenti/dirigente/dirigente.xml" />
+    <include file="pwm/penna/action/amministrazione/dirigente/dipendenti/cassiere/cassiere.xml" />
+    <include file="pwm/penna/action/amministrazione/dirigente/dipendenti/tecnico/tecnico.xml" />
+</struts>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="richieste" namespace="/Dirigenza/Postazione/Richiede" extends="dirigente">
+		<action name="Inserisci" class="pwm.penna.action.amministrazione.dirigente.postazioni.richiede.inserisci.RichiedeInserisci">
+			<result>/WEB-INF/Amministrazione/Dirigenza/Postazioni/Richiede/inserisci.jsp</result>
+		</action>
+		
+		<action name="Crea" class="pwm.penna.action.amministrazione.dirigente.postazioni.richiede.inserisci.RichiedeCrea">
+			<result name="success" type="redirectAction">Lista</result>
+			<result name="input">/WEB-INF/Amministrazione/Dirigenza/Postazioni/Richiede/inserisci.jsp</result>
+		</action>
+		
+		<action name="Modifica" class="pwm.penna.action.amministrazione.dirigente.postazioni.richiede.modifica.RichiedeModifica">
+			<result name="input">/WEB-INF/Amministrazione/Dirigenza/Postazioni/Richiede/modifica.jsp</result>
+		</action>
+		
+		<action name="Aggiorna" class="pwm.penna.action.amministrazione.dirigente.postazioni.richiede.modifica.RichiedeAggiorna">
+			<result name="success" type="redirectAction">Lista</result>
+			<result name="input">/WEB-INF/Amministrazione/Dirigenza/Postazioni/Richiede/modifica.jsp</result>
+		</action>
+		
+		<action name="Cancella" class="pwm.penna.action.amministrazione.dirigente.postazioni.richiede.cancella.RichiedeCancella">
+			<result name="success" type="redirectAction">Lista</result>
+		</action>
+		
+		<action name="Lista"  class="pwm.penna.action.amministrazione.dirigente.postazioni.richiede.lista.RichiedeLista">
+			<result>/WEB-INF/Amministrazione/Dirigenza/Postazioni/Richiede/visualizza.jsp</result>
+		</action>
+		
+		<action name="">
+			<result type="redirectAction">Lista</result>
+		</action>
+	</package>
+</struts>

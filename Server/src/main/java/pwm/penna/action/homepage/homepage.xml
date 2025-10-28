@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="homepage" namespace="/" extends="default">
+		<action name="Home" class="pwm.penna.action.homepage.home.Home">
+			<result>/WEB-INF/Home/home.jsp</result>
+		</action>
+		
+		<action name="Statistiche" class="pwm.penna.action.homepage.statistiche.Statistiche">
+			<result>/WEB-INF/Home/statistiche.jsp</result>
+		</action>
+		
+		<action name="DoveSiamo" class="pwm.penna.action.homepage.dovesiamo.DoveSiamo">
+			<result>/WEB-INF/Home/doveSiamo.jsp</result>
+		</action>
+		
+		<action name="Registrazione" class="pwm.penna.action.homepage.registrazione.Registrazione">
+			<result>/WEB-INF/Account/registrazione.jsp</result>
+		</action>
+		
+		<action name="Registra" class="pwm.penna.action.homepage.registrazione.Registra">
+			<result name="input">/WEB-INF/Account/registrazione.jsp</result>
+			<result name="success" type="redirectAction">Account/Pannello.action</result>
+		</action>
+		
+		<action name="Login" class="pwm.penna.action.homepage.login.Login">
+			<result>/WEB-INF/Account/login.jsp</result>
+		</action>
+		
+		<action name="Autenticazione" class="pwm.penna.action.homepage.login.Autenticazione">
+			<result name="input">/WEB-INF/Account/login.jsp</result>
+			<result name="user" type="redirectAction">Account/Pannello.action</result>
+			<result name="admin" type="redirectAction">Amministrazione/Pannello.action</result>
+		</action>
+		
+		<action name="Logout" class="pwm.penna.action.homepage.logout.Logout">
+			<result type="redirectAction">Home</result>
+		</action>
+		
+		<action name="">
+			<result type="redirectAction">Home</result>
+		</action>
+	</package>
+</struts>

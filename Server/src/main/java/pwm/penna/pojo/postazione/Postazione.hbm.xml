@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="test" name="pwm.penna.pojo.postazione.Postazione" optimistic-lock="none" table="postazione">
+        <composite-id class="pwm.penna.pojo.postazione.PostazioneId" name="id">
+            <key-property name="codiceSalaGiochi" type="int">
+                <column name="CodiceSalaGiochi"/>
+            </key-property>
+            <key-property name="stanza" type="int">
+                <column name="Stanza"/>
+            </key-property>
+            <key-property name="posto" type="int">
+                <column name="Posto"/>
+            </key-property>
+        </composite-id>
+        <property name="numero" type="int">
+            <column name="Numero" not-null="true" unique="true"/>
+        </property>
+        <many-to-one class="pwm.penna.pojo.dispositivodigioco.DispositivoDiGioco" fetch="select" name="dispositivoDiGioco" lazy="false">
+            <column name="DispositivoDiGioco" not-null="true" unique="true"/>
+        </many-to-one>
+        <many-to-one class="pwm.penna.pojo.salagiochi.SalaGiochi" fetch="select" insert="false" name="salaGiochi" update="false">
+            <column name="CodiceSalaGiochi" not-null="true"/>
+        </many-to-one>
+        <set fetch="select" inverse="true" lazy="true" name="richieste" table="richiede">
+            <key property-ref="numero">
+                <column name="Postazione" not-null="true"/>
+            </key>
+            <one-to-many class="pwm.penna.pojo.richiede.Richiede"/>
+        </set>
+    </class>
+</hibernate-mapping>

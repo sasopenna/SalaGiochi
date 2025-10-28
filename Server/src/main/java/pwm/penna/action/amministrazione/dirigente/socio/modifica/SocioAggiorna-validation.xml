@@ -1,0 +1,141 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- campi: socio.cliente.numeroCliente socio.nome socio.cognome socio.dataDiNascita socio.telefono socio.email socio.punteggio socio.membroDal -->
+	<!-- i campi membrodal e datadinascita li valida di "default" struts -->
+	
+	<field name="socio.numeroCliente">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+
+	<field name="socio.profilo.nome">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">50</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+
+	<field name="socio.profilo.cognome">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">50</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	<field name="socio.profilo.sesso">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="gender">
+			<message key="validator.gender" />
+		</field-validator>
+	</field>
+	
+	<field name="socio.profilo.telefono">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="long">
+			<param name="min">3000000000</param>
+			<param name="max">3999999999</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	<field name="socio.profilo.codiceFiscale">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="cf">
+			<message key="validator.cf" />
+		</field-validator>
+	</field>
+	
+	<field name="socio.profilo.email">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="email">
+			<message key="validator.email" />
+		</field-validator>
+	</field>
+	
+	<field name="socio.profilo.via">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="socio.profilo.numeroCivico">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">14500</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="socio.profilo.citta">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="socio.profilo.cap">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">99999</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	<field name="socio.punteggio">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+</validators>

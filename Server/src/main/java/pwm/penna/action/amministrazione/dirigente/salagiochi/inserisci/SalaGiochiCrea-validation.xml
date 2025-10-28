@@ -1,0 +1,123 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- campi: salagiochi.nome salagiochi.capienza salagiochi.orarioApertura salagiochi.orarioChiusura salagiochi.via salagiochi.numeroCivico salagiochi.città salagiochi.cap salagiochi.provincia salagiochi.regione -->
+	
+	<field name="salagiochi.nome">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">50</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="salagiochi.capienza">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	
+	
+	
+	<field name="salagiochi.indirizzo.via">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="salagiochi.indirizzo.numeroCivico">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">14500</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="salagiochi.indirizzo.citta">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="salagiochi.indirizzo.cap">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">99999</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="salagiochi.indirizzo.provincia">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="salagiochi.indirizzo.regione">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="salagiochi.orarioApertura">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+	
+	<field name="salagiochi.orarioChiusura">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+</validators>

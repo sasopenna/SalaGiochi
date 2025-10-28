@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="test" name="pwm.penna.pojo.account.Account" optimistic-lock="none" table="account">
+        <id name="email" type="string">
+            <column length="100" name="Email"/>
+            <generator class="foreign">
+            	<param name="property">profilo</param> <!-- si deve definire dato che è 1-to-1 bidir -->
+            </generator>
+        </id>
+        <property name="password" type="string">
+            <column length="100" name="Password"/>
+        </property>
+        <property name="ultimoLogin" type="date">
+            <column length="10" name="UltimoLogin"/>
+        </property>
+        <one-to-one class="pwm.penna.pojo.profilo.Profilo" name="profilo" constrained="true" cascade="save-update" lazy="false"/>
+    </class>
+</hibernate-mapping>

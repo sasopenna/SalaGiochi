@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="test" name="pwm.penna.pojo.assegna.Assegna" optimistic-lock="none" table="assegna">
+        <id name="prenotazione" type="java.lang.Integer">
+            <column name="Prenotazione"/>
+            <generator class="foreign">
+            	<param name="property">richiede</param>
+            </generator>
+        </id>
+        <one-to-one class="pwm.penna.pojo.richiede.Richiede" constrained="true" name="richiede" cascade="remove"/>
+        <many-to-one class="pwm.penna.pojo.cassiere.Cassiere" fetch="select" name="cassiere">
+            <column name="Cassiere" not-null="true"/>
+        </many-to-one>
+        <property name="costo" type="big_decimal">
+            <column name="Costo" not-null="true" precision="5" scale="2"/>
+        </property>
+        <property name="orario" type="time">
+            <column length="8" name="Orario" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="acc" namespace="/Dirigenza/Account" extends="dirigente">
+        <action name="Modifica" class="pwm.penna.action.amministrazione.dirigente.account.modifica.AccountModifica">
+            <result name="input">/WEB-INF/Amministrazione/Dirigenza/Account/modifica.jsp</result>
+        </action>
+        
+        <action name="Aggiorna" class="pwm.penna.action.amministrazione.dirigente.account.modifica.AccountAggiorna">
+            <result name="success" type="redirectAction">Lista</result>
+            <result name="input">/WEB-INF/Amministrazione/Dirigenza/Account/modifica.jsp</result>
+        </action>
+        
+        <action name="Cancella" class="pwm.penna.action.amministrazione.dirigente.account.cancella.AccountCancella">
+            <result name="success" type="redirectAction">Lista</result>
+        </action>
+        
+        <action name="Lista" class="pwm.penna.action.amministrazione.dirigente.account.lista.AccountLista">
+            <result>/WEB-INF/Amministrazione/Dirigenza/Account/visualizza.jsp</result>
+        </action>
+        
+        <action name="">
+            <result type="redirectAction">Lista</result>
+        </action>
+    </package>
+</struts>

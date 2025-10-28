@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 30 nov 2024, 18:01:17 by Hibernate Tools 6.5.1.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="test" name="pwm.penna.pojo.salagiochi.SalaGiochi" optimistic-lock="none" table="sala_giochi">
+        <id name="codice" type="java.lang.Integer">
+            <column name="Codice"/>
+            <generator class="identity"/>
+        </id>
+        <property name="nome" type="string">
+            <column length="50" name="Nome" not-null="true"/>
+        </property>
+        <property name="capienza" type="int">
+            <column name="Capienza" not-null="true"/>
+        </property>
+        <property name="orarioApertura" type="time">
+            <column length="8" name="OrarioApertura" not-null="true"/>
+        </property>
+        <property name="orarioChiusura" type="time">
+            <column length="8" name="OrarioChiusura" not-null="true"/>
+        </property>
+        
+        <component name="indirizzo" class="pwm.penna.pojo.salagiochi.Indirizzo">
+		    <property name="via" column="Via" length="100" not-null="true" type="string"/>
+		    <property name="numeroCivico" column="NumeroCivico" not-null="true" type="int"/>
+		    <property name="citta" column="Città" length="100" not-null="true" type="string"/>
+		    <property name="cap" column="CAP" not-null="true" precision="5" scale="0" type="int"/>
+		    <property name="provincia" column="Provincia" length="100" not-null="true" type="string"/>
+		    <property name="regione" column="Regione" length="100" not-null="true" type="string"/>
+		</component>
+		
+		<set name="dirigenti" table="dirigente_salagiochi" lazy="true" inverse="true" cascade="save-update">
+            <key column="SalaGiochi" not-null="true"/>
+			<many-to-many column="Dirigente" class="pwm.penna.pojo.dirigente.Dirigente" />
+		</set>
+
+        <set name="postazioni" table="postazione" lazy="true" inverse="true" cascade="save-update" fetch="select">
+            <key>
+                <column name="CodiceSalaGiochi" not-null="true"/>
+            </key>
+            <one-to-many class="pwm.penna.pojo.postazione.Postazione"/>
+        </set>
+    </class>
+</hibernate-mapping>

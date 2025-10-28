@@ -1,0 +1,174 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<!-- campi: cassiere.idDipendente cassiere.nome cassiere.cognome cassiere.dataDiNascita cassiere.codiceFiscale cassiere.cellulare cassiere.email cassiere.via cassiere.numeroCivico cassiere.citta cassiere.cap cassiere.salario cassiere.sportello cassiere.inizioTurno cassiere.fineTurno cassiere.salaGiochi.codice -->
+	<!-- il campo datadinascita lo valida di "default" struts -->
+	
+	<field name="cassiere.idDipendente">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+
+	<field name="cassiere.profilo.nome">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">50</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+
+	<field name="cassiere.profilo.cognome">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">50</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	<field name="cassiere.profilo.codiceFiscale">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="cf">
+			<message key="validator.cf" />
+		</field-validator>
+	</field>
+	
+	<field name="cassiere.profilo.sesso">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="gender">
+			<message key="validator.gender" />
+		</field-validator>
+	</field>
+	
+	<field name="cassiere.profilo.telefono">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="long">
+			<param name="min">3000000000</param>
+			<param name="max">3999999999</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="cassiere.profilo.email">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="email">
+			<message key="validator.email" />
+		</field-validator>
+	</field>
+	
+	<field name="cassiere.salario">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="double">
+			<param name="minInclusive">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="cassiere.salaGiochi.codice">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="cassiere.sportello">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<message key="validator.int_min" />
+		</field-validator>
+	</field>
+	
+	<field name="cassiere.profilo.via">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="cassiere.profilo.numeroCivico">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">14500</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="cassiere.profilo.citta">
+		<field-validator type="requiredstring">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">100</param>
+			<message key="validator.maxlen" />
+		</field-validator>
+		<field-validator type="onlyletters">
+			<message key="validator.onlyletters" />
+		</field-validator>
+	</field>
+	
+	
+	<field name="cassiere.profilo.cap">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+		<field-validator type="int">
+			<param name="min">0</param>
+			<param name="max">99999</param>
+			<message key="validator.int_minmax" />
+		</field-validator>
+	</field>
+	
+	<field name="cassiere.inizioTurno">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+	
+	<field name="cassiere.fineTurno">
+		<field-validator type="required">
+			<message key="validator.required" />
+		</field-validator>
+	</field>
+</validators>

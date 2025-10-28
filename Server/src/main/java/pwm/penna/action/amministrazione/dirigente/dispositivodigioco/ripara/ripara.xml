@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="ripara" namespace="/Dirigenza/DispositivoDiGioco/Ripara" extends="dirigente">
+        <action name="Inserisci" class="pwm.penna.action.amministrazione.dirigente.dispositivodigioco.ripara.inserisci.RiparaInserisci">
+            <result>/WEB-INF/Amministrazione/Dirigenza/DispositiviDiGioco/Ripara/inserisci.jsp</result>
+        </action>
+        
+        <action name="Crea" class="pwm.penna.action.amministrazione.dirigente.dispositivodigioco.ripara.inserisci.RiparaCrea">
+            <result name="success" type="redirectAction">Lista</result>
+            <result name="input">/WEB-INF/Amministrazione/Dirigenza/DispositiviDiGioco/Ripara/inserisci.jsp</result>
+        </action>
+        
+        <action name="Modifica" class="pwm.penna.action.amministrazione.dirigente.dispositivodigioco.ripara.modifica.RiparaModifica">
+            <result name="input">/WEB-INF/Amministrazione/Dirigenza/DispositiviDiGioco/Ripara/modifica.jsp</result>
+        </action>
+        
+        <action name="Aggiorna" class="pwm.penna.action.amministrazione.dirigente.dispositivodigioco.ripara.modifica.RiparaAggiorna">
+            <result name="success" type="redirectAction">Lista</result>
+            <result name="input">/WEB-INF/Amministrazione/Dirigenza/DispositiviDiGioco/Ripara/modifica.jsp</result>
+        </action>
+        
+        <action name="Cancella" class="pwm.penna.action.amministrazione.dirigente.dispositivodigioco.ripara.cancella.RiparaCancella">
+            <result name="success" type="redirectAction">Lista</result>
+        </action>
+        
+        <action name="Lista" class="pwm.penna.action.amministrazione.dirigente.dispositivodigioco.ripara.lista.RiparaLista">
+            <result>/WEB-INF/Amministrazione/Dirigenza/DispositiviDiGioco/Ripara/visualizza.jsp</result>
+        </action>
+        
+        <action name="">
+            <result type="redirectAction">Lista</result>
+        </action>
+    </package>
+</struts>
