@@ -1,0 +1,59 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+
+    <div class="card card-plain">
+        <div class="card-header pb-0 text-start">
+            <h4 class="font-weight-bolder"
+                th:text="${modifica} ? #{repairs.title.mod} : #{repairs.title.new}"></h4>
+            <p class="mb-0"
+               th:text="${modifica} ? #{repairs.instructions.mod} : #{repairs.instructions.new}"></p>
+        </div>
+        <div class="card-body card-body-fix">
+            <form th:action="${modifica} ? @{/admin/dirigenza/ripara/modifica/} + *{progressivo} : @{/admin/dirigenza/ripara/inserisci}"
+                  th:object="${riparaForm}"
+                  method="post" role="form">
+
+                <div class="mb-3" th:if="${modifica}">
+                    <h5 class="font-weight-bolder">
+                        <span th:text="#{repairs.repair}"></span>
+                        <span class="badge badge-sm bg-gradient-info badge-padding">
+                            <span class="text-uppercase text-white text-md font-weight-bolder"
+                                  th:text="*{progressivo}"></span>
+                        </span>
+                    </h5>
+                </div>
+
+                <div class="mb-3">
+                    <label th:text="#{repairs.technician}"></label>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('tecnico')}" th:errors="*{tecnico}"></span>
+                    <select th:field="*{tecnico}" class="form-control form-control-lg" required>
+                        <option th:each="t : ${tecnici}" th:value="${t.idDipendente}"
+                                th:text="|(${t.idDipendente}) ${t.profilo.nome} ${t.profilo.cognome}|"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label th:text="#{repairs.device}"></label>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('dispositivoDiGioco')}" th:errors="*{dispositivoDiGioco}"></span>
+                    <select th:field="*{dispositivoDiGioco}" class="form-control form-control-lg" required>
+                        <option th:each="d : ${dispositivi}" th:value="${d.id}"
+                                th:text="|(${d.id}) ${d.tipo}|"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label th:text="#{repairs.repairCost}"></label> <i class="opacity-3">(Ex: 50.00)</i>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('costoRiparazione')}" th:errors="*{costoRiparazione}"></span>
+                    <input type="number" step="0.01" th:field="*{costoRiparazione}"
+                           th:placeholder="#{repairs.repairCost}"
+                           class="form-control form-control-lg" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                            th:text="#{${modifica} ? common.update : common.insert}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

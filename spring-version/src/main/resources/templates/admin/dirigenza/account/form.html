@@ -1,0 +1,54 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+
+    <div class="card card-plain">
+        <div class="card-header pb-0 text-start">
+            <h4 class="font-weight-bolder"
+                th:text="${modifica} ? #{accounts.title.mod} : #{accounts.title.new}"></h4>
+            <p class="mb-0"
+               th:text="${modifica} ? #{accounts.instructions.mod} : #{accounts.instructions.new}"></p>
+        </div>
+        <div class="card-body card-body-fix">
+            <form th:action="${modifica} ? @{/admin/dirigenza/account/modifica/} + *{email} : @{/admin/dirigenza/account/inserisci}"
+                  th:object="${accountForm}"
+                  method="post" role="form">
+
+                <div class="mb-3" th:if="${modifica}">
+                    <h5 class="font-weight-bolder">
+                        <span th:text="#{accounts.email}"></span>
+                        <span class="badge badge-sm bg-gradient-info badge-padding">
+                            <span class="text-uppercase text-white text-md font-weight-bolder"
+                                  th:text="*{email}"></span>
+                        </span>
+                    </h5>
+                    <input type="hidden" th:field="*{email}">
+                </div>
+
+                <div class="mb-3" th:if="${!modifica}">
+                    <label th:text="#{accounts.email}"></label>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('email')}"
+                          th:errors="*{email}"></span>
+                    <input type="email" th:field="*{email}"
+                           th:placeholder="#{accounts.email}"
+                           class="form-control form-control-lg" required>
+                </div>
+
+                <div class="mb-3">
+                    <label th:text="#{accounts.password}"></label>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('password')}"
+                          th:errors="*{password}"></span>
+                    <input type="password" th:field="*{password}"
+                           th:placeholder="#{accounts.password}"
+                           class="form-control form-control-lg" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                            th:text="#{${modifica} ? common.update : common.insert}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

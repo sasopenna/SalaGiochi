@@ -1,0 +1,57 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+
+    <div class="card card-plain">
+        <div class="card-header pb-0 text-start">
+            <h4 class="font-weight-bolder"
+                th:text="${modifica} ? #{requests.title.mod} : #{requests.title.new}"></h4>
+            <p class="mb-0"
+               th:text="${modifica} ? #{requests.instructions.mod} : #{requests.instructions.new}"></p>
+        </div>
+        <div class="card-body card-body-fix">
+            <form th:action="${modifica} ? @{/admin/dirigenza/richiede/modifica/} + *{prenotazione} : @{/admin/dirigenza/richiede/inserisci}"
+                  th:object="${richiedeForm}"
+                  method="post" role="form">
+
+                <div class="mb-3" th:if="${modifica}">
+                    <h5 class="font-weight-bolder">
+                        <span th:text="#{requests.title}"></span>
+                        <span class="badge badge-sm bg-gradient-info badge-padding">
+                            <span class="text-uppercase text-white text-md font-weight-bolder"
+                                  th:text="*{prenotazione}"></span>
+                        </span>
+                    </h5>
+                </div>
+
+                <div class="mb-3">
+                    <label th:text="#{requests.client}"></label>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"></span>
+                    <select th:field="*{cliente}" class="form-control form-control-lg" required>
+                        <option th:each="c : ${clienti}" th:value="${c.numeroCliente}"
+                                th:text="|[${c.numeroCliente}] ${c.socio != null ? c.socio.profilo.nome + ' ' + c.socio.profilo.cognome : ''}|"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label th:text="#{requests.station}"></label>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('postazione.numero')}" th:errors="*{postazione.numero}"></span>
+                    <select th:field="*{postazione.numero}" class="form-control form-control-lg" required>
+                        <option th:each="p : ${postazioni}" th:value="${p.numero}"
+                                th:text="|[${p.numero}] ${p.id.salaGiochi.nome} (Stanza ${p.id.stanza} - Posto ${p.id.posto})|"></option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label th:text="#{requests.duration}"></label>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('durata')}" th:errors="*{durata}"></span>
+                    <input type="time" th:field="*{durata}" class="form-control form-control-lg" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                            th:text="#{${modifica} ? common.update : common.insert}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

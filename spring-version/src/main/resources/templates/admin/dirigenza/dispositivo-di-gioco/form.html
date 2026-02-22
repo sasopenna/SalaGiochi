@@ -1,0 +1,118 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+
+    <div class="card card-plain">
+        <div class="card-header pb-0 text-start">
+            <h4 class="font-weight-bolder"
+                th:text="${modifica} ? #{devices.title.mod} : #{devices.title.new}"></h4>
+            <p class="mb-0"
+               th:text="${modifica} ? #{devices.instructions.mod} : #{devices.instructions.new}"></p>
+        </div>
+        <div class="card-body card-body-fix">
+            <form th:action="${modifica} ? @{/admin/dirigenza/dispositivo-di-gioco/modifica/} + *{id} : @{/admin/dirigenza/dispositivo-di-gioco/inserisci}"
+                  th:object="${dispositivoDiGiocoForm}"
+                  method="post" role="form">
+
+                <div class="mb-3" th:if="${modifica}">
+                    <h5 class="font-weight-bolder">
+                        <span th:text="#{devices.device}"></span>
+                        <span class="badge badge-sm bg-gradient-info badge-padding">
+                            <span class="text-uppercase text-white text-md font-weight-bolder"
+                                  th:text="*{id}"></span>
+                        </span>
+                    </h5>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 mb-3">
+                        <div class="text-uppercase text-secondary text-sm font-weight-bolder" th:text="#{devices.platform}"></div>
+                        <label th:text="#{devices.device}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></span>
+                        <select th:field="*{tipo}" class="form-control form-control-lg" required th:disabled="${modifica}" id="tipoSelect">
+                            <option value="PC">PC</option>
+                            <option value="Xbox">Xbox</option>
+                            <option value="PlayStation">PlayStation</option>
+                        </select>
+                        <!-- se in modifica, tipo è readonly: aggiungiamo hidden field -->
+                        <input type="hidden" th:if="${modifica}" th:field="*{tipo}">
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="text-uppercase text-secondary text-sm font-weight-bolder" th:text="#{devices.version}"></div>
+
+                        <div class="col-lg-12 mb-3" id="sezionePC">
+                            <span th:text="#{devices.version}"></span>
+                            <span th:if="${#fields.hasErrors('discriminator')}" th:errors="*{discriminator}" class="text-danger"></span>
+                            <select name="discriminator" id="pc" th:field="*{discriminator}" class="form-control form-control-lg" required>
+                                <option th:each="opt : ${discriminatorWindows}" th:value="${opt}" th:text="${opt}"></option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-12 mb-3" id="sezioneXbox">
+                            <span th:text="#{devices.gen}"></span>
+                            <span th:if="${#fields.hasErrors('discriminator')}" th:errors="*{discriminator}" class="text-danger"></span>
+                            <select name="discriminator" id="xbox" th:field="*{discriminator}" class="form-control form-control-lg" required>
+                                <option th:each="opt : ${discriminatorXbox}" th:value="${opt}" th:text="${opt}"></option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-12 mb-3" id="sezionePlay">
+                            <span th:text="#{devices.gen}"></span>
+                            <span th:if="${#fields.hasErrors('discriminator')}" th:errors="*{discriminator}" class="text-danger"></span>
+                            <select name="discriminator" id="play" th:field="*{discriminator}" class="form-control form-control-lg" required>
+                                <option th:each="opt : ${discriminatorPlayStation}" th:value="${opt}" th:text="${opt}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="text-uppercase text-secondary text-sm font-weight-bolder" th:text="#{devices.acquisition_date}"></div>
+                        <label th:text="#{devices.date}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('dataAcquisizione')}" th:errors="*{dataAcquisizione}"></span>
+                        <input type="date" th:field="*{dataAcquisizione}" class="form-control form-control-lg" required>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                            th:text="#{${modifica} ? common.update : common.insert}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const dispositivo = document.getElementById("tipoSelect");
+
+        const sezionePC = document.getElementById("sezionePC");
+        const sezioneXbox = document.getElementById("sezioneXbox");
+        const sezionePlay = document.getElementById("sezionePlay");
+        const PC = document.getElementById("pc");
+        const Xbox = document.getElementById("xbox");
+        const Play = document.getElementById("play");
+
+        function aggiorna() {
+            sezionePC.style.display = "none";
+            sezioneXbox.style.display = "none";
+            sezionePlay.style.display = "none";
+            PC.disabled = true;
+            Xbox.disabled = true;
+            Play.disabled = true;
+
+            // mostro e abilito solo quelli "scelti"
+            if (dispositivo.value === "PC") {
+                sezionePC.style.display = "block";
+                PC.disabled = false;
+            } else if (dispositivo.value === "Xbox") {
+                sezioneXbox.style.display = "block";
+                Xbox.disabled = false;
+            } else if (dispositivo.value === "PlayStation") {
+                sezionePlay.style.display = "block";
+                Play.disabled = false;
+            }
+        }
+
+        dispositivo.onchange = aggiorna;
+        aggiorna();
+    </script>
+</div>

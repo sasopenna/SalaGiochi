@@ -1,0 +1,222 @@
+<div xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      layout:fragment="content">
+    <div class="row p-4">
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0" th:text="#{genders}"></h6>
+                </div>
+                <table class="m-3">
+                    <tbody>
+                    <tr>
+                        <td><div class="genere-img uomo"></div></td>
+                        <td width="100%">
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-1 text-dark text-sm" th:text="#{genders.man}"></h6>
+                                <span class="text-xs font-weight-bold"
+                                      th:text="#{genders.registered(${uomo})}"></span>
+                            </div>
+                        </td>
+                        <td rowspan="2">
+                            <div class="statistiche-chart">
+                                <canvas id="sesso-chart" class="chart-canvas"></canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><div class="genere-img donna"></div></td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-1 text-dark text-sm" th:text="#{genders.woman}"></h6>
+                                <span class="text-xs font-weight-bold"
+                                      th:text="#{genders.registered(${donna})}"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0" th:text="#{devices}"></h6>
+                </div>
+                <table class="m-3">
+                    <tbody>
+                    <tr>
+                        <td><img class="console-img" style="border-radius: 0px"
+                                 th:src="@{/assets/img/console/pc.jpg}" alt="PC"></td>
+                        <td width="100%">
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-1 text-dark text-sm">PC</h6>
+                                <span class="text-xs font-weight-bold"
+                                      th:text="#{devices.requested(${pc})}"></span>
+                            </div>
+                        </td>
+                        <td rowspan="3">
+                            <div class="statistiche-chart">
+                                <canvas id="console-chart" class="chart-canvas"></canvas>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img class="console-img"
+                                 th:src="@{/assets/img/console/xbox.jpg}" alt="Xbox"></td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-1 text-dark text-sm">Xbox</h6>
+                                <span class="text-xs font-weight-bold"
+                                      th:text="#{devices.requested(${xbox})}"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img class="console-img"
+                                 th:src="@{/assets/img/console/playstation.jpg}" alt="PlayStation"></td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-1 text-dark text-sm">PlayStation</h6>
+                                <span class="text-xs font-weight-bold"
+                                      th:text="#{devices.requested(${play})}"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-2" th:text="#{members.best}"></h6>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center">
+                        <thead>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="text-center">
+                                    <h6 class="text-sm mb-0" th:text="#{members.member}"></h6>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <h6 class="text-sm mb-0" th:text="#{members.points}"></h6>
+                                </div>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item, stat : ${top5}">
+                            <td>
+                                <div class="text-center">
+                                    <h6 class="text-sm mb-0" th:text="${stat.index + 1} + '.'"></h6>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <h6 class="text-sm mb-0"
+                                        th:text="${item.profilo.nome + ' ' + item.profilo.cognome}"></h6>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <h6 class="text-sm mb-0" th:text="${item.punteggio}"></h6>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="mb-2" th:text="#{members.loyal}"></h6>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center">
+                        <thead>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="text-center">
+                                    <h6 class="text-sm mb-0" th:text="#{members.member}"></h6>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <h6 class="text-sm mb-0" th:text="#{members.since}"></h6>
+                                </div>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item, stat : ${fedeli5}">
+                            <td>
+                                <div class="text-center">
+                                    <h6 class="text-sm mb-0" th:text="${stat.index + 1} + '.'"></h6>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <h6 class="text-sm mb-0"
+                                        th:text="${item.profilo.nome + ' ' + item.profilo.cognome}"></h6>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col text-center">
+                                    <h6 class="text-sm mb-0" th:text="${item.membroDal}"></h6>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        window.onload = () => {
+            // Chart per console
+            new Chart(document.getElementById("console-chart").getContext("2d"), {
+                type: 'doughnut',
+                options: { plugins: { legend: { display: false } } },
+                data: {
+                    labels: ['PC', 'Xbox', 'PlayStation'],
+                    datasets: [{
+                        label: 'Device',
+                        data: [ [[${pc}]], [[${xbox}]], [[${play}]] ],
+                        backgroundColor: ['rgb(0, 0, 0)', 'rgb(16, 124, 16)', 'rgb(0, 112, 209)']
+                    }]
+                }
+            });
+
+            // Chart per genere
+            new Chart(document.getElementById("sesso-chart").getContext("2d"), {
+                type: 'pie',
+                options: {
+                    plugins: { legend: { display: false } },
+                    elements: { arc: { borderWidth: 0 } }
+                },
+                data: {
+                    labels: ['Donna', 'Uomo'],
+                    datasets: [{
+                        label: 'Genere',
+                        data: [ [[${donna}]], [[${uomo}]] ],
+                        backgroundColor: ['rgb(243, 175, 204)', 'rgb(166, 217, 245)']
+                    }]
+                }
+            });
+        }
+    </script>
+</div>

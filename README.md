@@ -1,29 +1,25 @@
 # SalaGiochi
 
-Applicazione di un software gestionale che integra frontend web, backend relazionale e un'app Android per offrire un'esperienza fluida e multi-piattaforma. Il progetto è stato sviluppato come parte integrante di un esame, combinando tecnologie per simulare la gestione di un complesso di sale giochi.
-
+Applicazione gestionale multi‑piattaforma che integra frontend web, backend relazionale e un'app Android.  
+Il progetto è stato sviluppato come parte dell'esame *Progettazione Web e Mobile*, simulando la gestione di un complesso di sale giochi.
 
 ---
 
 ## Funzionalità principali
 
-- **Applicazione web interattiva**: frontend dinamico con Struts, JSP e Bootstrap
+- **Applicazione web interattiva**: frontend dinamico con Bootstrap e backend in Struts e Spring
 - **Persistenza dati**: integrazione con MySQL/OracleDB tramite Hibernate
-- **Applicazione mobile dedicata**: app Android per interagire col sistema da smartphone
+- **Applicazione mobile dedicata**: app Android per interagire con il sistema da smartphone
 
 ---
 
-## Tecnologie utilizzate
+## Versioni disponibili
 
-| Tecnologia   | Impiego                                 |
-|--------------|------------------------------------------|
-| Struts       | Framework MVC per il frontend web        |
-| JSP          | Rendering dinamico delle pagine          |
-| Bootstrap    | UI responsive e moderna                  |
-| Hibernate    | ORM per MySQL/OracleDB                 |
-| Android SDK  | Sviluppo app mobile                      |
-| Java         | Linguaggio principale per backend e Android |
-| XML          | Configurazione Struts e Hibernate        |
+Il progetto è sviluppato in più varianti, ognuna basata su uno stack differente:
+
+- [**Struts**](https://github.com/sasopenna/SalaGiochi/tree/main/struts-version) – implementazione basata su Struts 2 e JSP  
+- [**Spring**](https://github.com/sasopenna/SalaGiochi/tree/main/spring-version) – implementazione moderna basata su Spring Boot e Thymeleaf  
+- [**Android**](https://github.com/sasopenna/SalaGiochi/tree/main/android-version) – app mobile sviluppata in Java che interagisce con il backend
 
 ---
 
@@ -35,4 +31,4 @@ Applicazione di un software gestionale che integra frontend web, backend relazio
 
 ## Crediti
 
-Progetto sviluppato da **Salvatore Penna** come parte integrante dell'esame _Progettazione Web e Mobile_.
+Progetto sviluppato da **Salvatore Penna** come parte dell'esame *Progettazione Web e Mobile*.

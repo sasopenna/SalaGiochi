@@ -1,0 +1,133 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+
+    <div class="card card-plain">
+        <div class="card-header pb-0 text-start">
+            <h4 class="font-weight-bolder"
+                th:text="${modifica} ? #{members.title.mod} : #{members.title.new}"></h4>
+            <p class="mb-0"
+               th:text="${modifica} ? #{members.instructions.mod} : #{members.instructions.new}"></p>
+        </div>
+        <div class="card-body card-body-fix">
+            <form th:action="${modifica} ? @{/admin/dirigenza/socio/modifica/} + *{numeroCliente} : @{/admin/dirigenza/socio/inserisci}"
+                  th:object="${socioForm}"
+                  method="post" role="form">
+
+                <div class="mb-3" th:if="${modifica}">
+                    <h5 class="font-weight-bolder">
+                        <span th:text="#{members.member}"></span>
+                        <span class="badge badge-sm bg-gradient-info badge-padding">
+                            <span class="text-uppercase text-white text-md font-weight-bolder"
+                                  th:text="*{numeroCliente}"></span>
+                        </span>
+                    </h5>
+                </div>
+
+                <div class="mb-3" th:if="${!modifica}">
+                    <span class="text-uppercase text-secondary text-sm font-weight-bolder" th:text="#{members.client_number}"></span>
+                    <span class="text-danger text-sm" th:if="${#fields.hasErrors('numeroCliente')}" th:errors="*{numeroCliente}"></span>
+                    <select th:field="*{numeroCliente}" class="form-control form-control-lg" required>
+                        <option th:each="c : ${notSoci}" th:value="${c.numeroCliente}" th:text="${c.numeroCliente}"></option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-5">
+                        <span class="text-uppercase text-secondary text-sm font-weight-bolder" th:text="#{members.personal_info}"></span>
+                        <div class="row mt-3">
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{members.first_name}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.nome')}" th:errors="*{profilo.nome}"></span>
+                                <input type="text" th:field="*{profilo.nome}" th:placeholder="#{members.first_name}" class="form-control form-control-lg" required>
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{members.last_name}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.cognome')}" th:errors="*{profilo.cognome}"></span>
+                                <input type="text" th:field="*{profilo.cognome}" th:placeholder="#{members.last_name}" class="form-control form-control-lg" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{members.gender}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.sesso')}" th:errors="*{profilo.sesso}"></span>
+                                <select th:field="*{profilo.sesso}" class="form-control form-control-lg" required>
+                                    <option value="Uomo">Uomo</option>
+                                    <option value="Donna">Donna</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{members.birthdate}"></label> <i class="opacity-3">(gg/mm/aa)</i>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.dataDiNascita')}" th:errors="*{profilo.dataDiNascita}"></span>
+                                <input type="date" th:field="*{profilo.dataDiNascita}" class="form-control form-control-lg" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 mb-3">
+                                <label th:text="#{members.taxcode}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.codiceFiscale')}" th:errors="*{profilo.codiceFiscale}"></span>
+                                <input type="text" th:field="*{profilo.codiceFiscale}" th:placeholder="#{members.taxcode}" class="form-control form-control-lg" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 bl-table">
+                        <span class="text-uppercase text-secondary text-sm font-weight-bolder" th:text="#{members.contacts}"></span>
+                        <div class="col-lg-12 mt-3 mb-3">
+                            <label th:text="#{members.phone}"></label>
+                            <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.telefono')}" th:errors="*{profilo.telefono}"></span>
+                            <input type="number" th:field="*{profilo.telefono}" th:placeholder="#{members.phone}" class="form-control form-control-lg" required>
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <label th:text="#{members.e-mail}"></label>
+                            <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.email')}" th:errors="*{profilo.email}"></span>
+                            <input type="email" th:field="*{profilo.email}" th:placeholder="#{members.e-mail}"
+                                   class="form-control form-control-lg" required th:readonly="${modifica}">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 bl-table">
+                        <span class="text-uppercase text-secondary text-sm font-weight-bolder" th:text="#{members.statistics}"></span>
+                        <div class="row mt-3">
+                            <div class="col-lg-12 mb-3">
+                                <label th:text="#{members.points}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('punteggio')}" th:errors="*{punteggio}"></span>
+                                <input type="number" th:field="*{punteggio}" th:placeholder="#{members.points}" class="form-control form-control-lg" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <span class="text-uppercase text-secondary text-sm font-weight-bolder" th:text="#{members.residence}"></span>
+                    <div class="col-lg-3 mb-3">
+                        <label th:text="#{members.street}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.indirizzo.via')}" th:errors="*{profilo.indirizzo.via}"></span>
+                        <input type="text" th:field="*{profilo.indirizzo.via}" th:placeholder="#{members.street}" class="form-control form-control-lg" required>
+                    </div>
+                    <div class="col-lg-3 mb-3">
+                        <label th:text="#{members.street_number}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.indirizzo.numeroCivico')}" th:errors="*{profilo.indirizzo.numeroCivico}"></span>
+                        <input type="number" th:field="*{profilo.indirizzo.numeroCivico}" th:placeholder="#{members.street_number}" class="form-control form-control-lg" required>
+                    </div>
+                    <div class="col-lg-3 mb-3">
+                        <label th:text="#{members.city}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.indirizzo.citta')}" th:errors="*{profilo.indirizzo.citta}"></span>
+                        <input type="text" th:field="*{profilo.indirizzo.citta}" th:placeholder="#{members.city}" class="form-control form-control-lg" required>
+                    </div>
+                    <div class="col-lg-3 mb-3">
+                        <label th:text="#{members.cap}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('profilo.indirizzo.cap')}" th:errors="*{profilo.indirizzo.cap}"></span>
+                        <input type="number" th:field="*{profilo.indirizzo.cap}" th:placeholder="#{members.cap}" class="form-control form-control-lg" required>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                            th:text="#{${modifica} ? common.update : common.insert}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

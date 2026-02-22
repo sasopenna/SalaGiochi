@@ -1,0 +1,67 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+
+    <div class="card card-plain">
+        <div class="card-header pb-0 text-start">
+            <h4 class="font-weight-bolder"
+                th:text="${modifica} ? #{stations.title.mod} : #{stations.title.new}"></h4>
+            <p class="mb-0"
+               th:text="${modifica} ? #{stations.instructions.mod} : #{stations.instructions.new}"></p>
+        </div>
+        <div class="card-body card-body-fix">
+            <form th:action="${modifica} ? @{/admin/dirigenza/postazione/modifica/{pid}(pid=*{id.salaGiochi.codice + '_' + id.stanza + '_' + id.posto})} : @{/admin/dirigenza/postazione/inserisci}"
+                  th:object="${postazioneForm}"
+                  method="post" role="form">
+
+                <div class="mb-3" th:if="${modifica}">
+                    <h5 class="font-weight-bolder">
+                        <span th:text="#{stations.title}"></span>
+                        <span class="badge badge-sm bg-gradient-info badge-padding">
+                            <span class="text-uppercase text-white text-md font-weight-bolder"
+                                  th:text="*{numero}"></span>
+                        </span>
+                    </h5>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        <label th:text="#{stations.gameroom}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('id.salaGiochi.codice')}" th:errors="*{id.salaGiochi.codice}"></span>
+                        <select th:field="*{id.salaGiochi.codice}" class="form-control form-control-lg" required th:disabled="${modifica}">
+                            <option th:each="sala : ${sale}" th:value="${sala.codice}" th:text="${sala.nome}"></option>
+                        </select>
+                        <input type="hidden" th:if="${modifica}" th:field="*{id.salaGiochi.codice}">
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label th:text="#{stations.room}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('id.stanza')}" th:errors="*{id.stanza}"></span>
+                        <input type="number" step="1" th:field="*{id.stanza}" th:placeholder="#{stations.room}"
+                               class="form-control form-control-lg" required th:readonly="${modifica}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        <label th:text="#{stations.device}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('dispositivoDiGioco')}" th:errors="*{dispositivoDiGioco}"></span>
+                        <select th:field="*{dispositivoDiGioco}" class="form-control form-control-lg" required>
+                            <option th:each="d : ${dispositivi}" th:value="${d.id}" th:text="|(${d.id}) ${d.tipo}|"></option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <label th:text="#{stations.position}"></label>
+                        <span class="text-danger text-sm" th:if="${#fields.hasErrors('id.posto')}" th:errors="*{id.posto}"></span>
+                        <input type="number" step="1" th:field="*{id.posto}" th:placeholder="#{stations.position}"
+                               class="form-control form-control-lg" required th:readonly="${modifica}">
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                            th:text="#{${modifica} ? common.update : common.insert}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+    <div class="row row-cols-2 p-4 justify-content-between">
+        <div class="text-start">
+            <span class="badge badge-sm bg-gradient-secondary">
+                <a class="text-uppercase text-white text-xs font-weight-bolder"
+                   th:text="${lista.size()}"></a>
+            </span>
+            <b th:text="#{managers.title}"></b>
+        </div>
+        <div class="text-end">
+            <span class="badge badge-sm bg-gradient-info">
+                <a class="text-uppercase text-white text-xxs font-weight-bolder"
+                   th:href="@{/admin/dirigenza/dirigente/inserisci}"
+                   th:text="#{common.insert}"></a>
+            </span>
+        </div>
+    </div>
+
+    <div class="card-body pt-0">
+        <table class="table align-items-center mb-0 edit-table">
+            <tbody>
+            <tr>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder" th:text="#{employee.id}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder" th:text="#{employee.personalData}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" th:text="#{employee.birthdate}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder" th:text="#{employee.contacts}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder" th:text="#{employee.address}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" th:text="#{managers.experience}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" th:text="#{managers.management}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder" th:text="#{employee.shift}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder text-end" th:text="#{common.operations}"></td>
+            </tr>
+
+            <tr th:each="dirigente : ${lista}">
+                <td class="mb-0 text-sm" th:text="${dirigente.idDipendente}"></td>
+                <td class="mb-0 text-sm">
+                    <span th:text="${dirigente.profilo.nome + ' ' + dirigente.profilo.cognome}"></span>
+                    <p class="text-xxs mb-0"><b th:text="${dirigente.profilo.codiceFiscale}"></b></p>
+                    <p class="text-xxs mb-0" th:text="${dirigente.profilo.sesso}"></p>
+                </td>
+                <td class="mb-0 text-sm text-center" th:text="${dirigente.profilo.dataDiNascita}"></td>
+                <td class="mb-0 text-sm">
+                    <p class="text-xs mb-0" th:utext="#{managers.cellphone(${dirigente.profilo.telefono.toString()})}"></p>
+                    <p class="text-xs mb-0" th:utext="#{managers.e-mail(${dirigente.profilo.email})}"></p>
+                </td>
+                <td class="mb-0 text-xs">
+                    <span th:text="#{managers.location_row(${dirigente.profilo.indirizzo.via}, ${dirigente.profilo.indirizzo.numeroCivico})}"></span><br>
+                    <span th:text="#{managers.location_row2(${dirigente.profilo.indirizzo.cap.toString()}, ${dirigente.profilo.indirizzo.citta})}"></span>
+                </td>
+                <td class="mb-0 text-sm text-center" th:utext="#{managers.experience_years(${dirigente.esperienza})}"></td>
+                <td class="mb-0 text-xxs text-center" th:utext="#{managers.period_salary(${dirigente.periodo}, ${dirigente.salario})}"></td>
+                <td class="mb-0 text-xs">
+                    <p class="text-xs mb-0" th:utext="#{managers.shift_start(${dirigente.inizioTurno})}"></p>
+                    <p class="text-xs mb-0" th:utext="#{managers.shift_end(${dirigente.fineTurno})}"></p>
+                </td>
+                <td class="align-middle text-end text-sm">
+                    <a th:href="@{/admin/dirigenza/dirigente/modifica/} + ${dirigente.idDipendente}">
+                        <span class="badge badge-sm bg-gradient-success">
+                            <i class="ni ni-ruler-pencil text-white text-sm"></i>
+                        </span>
+                    </a>
+                    <a th:href="@{/admin/dirigenza/dirigente/elimina/} + ${dirigente.idDipendente}"
+                       th:onclick="|return confirm('[[#{managers.confirmdelete}]]')|">
+                        <span class="badge badge-sm bg-gradient-danger">
+                            <i class="ni ni-fat-remove text-white text-sm"></i>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,157 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	 layout:decorate="~{layout}"
+	 layout:fragment="content">
+	<div class="row">
+		<div class="d-flex flex-column mx-lg-0 mx-auto">
+			<div class="card card-plain">
+				<div class="card-header pb-0 text-start">
+					<h4 class="font-weight-bolder" th:text="#{register.title}"></h4>
+					<p class="mb-0" th:text="#{register.instructions}"></p>
+				</div>
+				<div class="card-body card-body-fix">
+					<form th:action="@{/account/socio/registrazione}" th:object="${registraForm}" method="post">
+
+						<span class="text-uppercase text-secondary text-sm font-weight-bolder"
+							  th:text="#{register.data}"></span>
+						<div class="row">
+							<div class="col-lg-6 mb-3">
+								<input type="text" th:field="*{profilo.nome}"
+									   class="form-control form-control-lg"
+									   th:placeholder="#{register.name}" />
+								<span th:if="${#fields.hasErrors('profilo.nome')}"
+									  th:errors="*{profilo.nome}"
+									  class="text-danger small"></span>
+							</div>
+							<div class="col-lg-6 mb-3">
+								<input type="text" th:field="*{profilo.cognome}"
+									   class="form-control form-control-lg"
+									   th:placeholder="#{register.surname}" />
+								<span th:if="${#fields.hasErrors('profilo.cognome')}"
+									  th:errors="*{profilo.cognome}"
+									  class="text-danger small"></span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-6 mb-3">
+								<select th:field="*{profilo.sesso}"
+										class="form-control form-control-lg">
+									<option value="Uomo">Uomo</option>
+									<option value="Donna">Donna</option>
+								</select>
+								<span th:if="${#fields.hasErrors('profilo.sesso')}"
+									  th:errors="*{profilo.sesso}"
+									  class="text-danger small"></span>
+							</div>
+							<div class="col-lg-6 mb-3">
+								<input type="date" th:field="*{profilo.dataDiNascita}"
+									   class="form-control form-control-lg"
+									   th:placeholder="#{register.birthdate}" />
+								<span th:if="${#fields.hasErrors('profilo.dataDiNascita')}"
+									  th:errors="*{profilo.dataDiNascita}"
+									  class="text-danger small"></span>
+							</div>
+							<div class="col-lg-12 mb-3">
+								<input type="text" th:field="*{profilo.codiceFiscale}"
+									   class="form-control form-control-lg"
+									   th:placeholder="#{register.cf}" />
+								<span th:if="${#fields.hasErrors('profilo.codiceFiscale')}"
+									  th:errors="*{profilo.codiceFiscale}"
+									  class="text-danger small"></span>
+							</div>
+						</div>
+
+						<span class="text-uppercase text-secondary text-sm font-weight-bolder"
+							  th:text="#{register.contacts}"></span>
+						<div class="row">
+							<div class="col-lg-6 mb-3">
+								<div class="row">
+									<div class="col-lg-6 mb-3">
+										<input type="text" th:field="*{profilo.indirizzo.via}"
+											   class="form-control form-control-lg"
+											   th:placeholder="#{register.via}" />
+										<span th:if="${#fields.hasErrors('profilo.indirizzo.via')}"
+											  th:errors="*{profilo.indirizzo.via}"
+											  class="text-danger small"></span>
+									</div>
+									<div class="col-lg-6 mb-3">
+										<input type="text" th:field="*{profilo.indirizzo.numeroCivico}"
+											   class="form-control form-control-lg"
+											   th:placeholder="#{register.nr}" />
+										<span th:if="${#fields.hasErrors('profilo.indirizzo.numeroCivico')}"
+											  th:errors="*{profilo.indirizzo.numeroCivico}"
+											  class="text-danger small"></span>
+									</div>
+									<div class="col-lg-6 mb-3">
+										<input type="text" th:field="*{profilo.indirizzo.citta}"
+											   class="form-control form-control-lg"
+											   th:placeholder="#{register.citta}" />
+										<span th:if="${#fields.hasErrors('profilo.indirizzo.citta')}"
+											  th:errors="*{profilo.indirizzo.citta}"
+											  class="text-danger small"></span>
+									</div>
+									<div class="col-lg-6 mb-3">
+										<input type="number" th:field="*{profilo.indirizzo.cap}"
+											   class="form-control form-control-lg"
+											   th:placeholder="#{register.cap}" />
+										<span th:if="${#fields.hasErrors('profilo.indirizzo.cap')}"
+											  th:errors="*{profilo.indirizzo.cap}"
+											  class="text-danger small"></span>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 mb-3">
+								<div class="row">
+									<div class="col-lg-12 mb-3">
+										<input type="tel" th:field="*{profilo.telefono}"
+											   class="form-control form-control-lg"
+											   th:placeholder="#{register.cellphone}" />
+										<span th:if="${#fields.hasErrors('profilo.telefono')}"
+											  th:errors="*{profilo.telefono}"
+											  class="text-danger small"></span>
+									</div>
+									<div class="col-lg-12 mb-3">
+										<input type="email" th:field="*{profilo.email}"
+											   class="form-control form-control-lg"
+											   th:placeholder="#{register.email}" />
+										<span th:if="${#fields.hasErrors('profilo.email')}"
+											  th:errors="*{profilo.email}"
+											  class="text-danger small"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<span class="text-uppercase text-secondary text-sm font-weight-bolder"
+							  th:text="#{register.password}"></span>
+						<div class="row">
+							<div class="col-lg-6 mb-3">
+								<input type="password" th:field="*{password}"
+									   class="form-control form-control-lg"
+									   th:placeholder="#{register.password}" />
+								<span th:if="${#fields.hasErrors('password')}"
+									  th:errors="*{password}"
+									  class="text-danger small"></span>
+							</div>
+							<div class="col-lg-6 mb-3">
+								<input type="password" th:field="*{confirmPassword}"
+									   class="form-control form-control-lg"
+									   th:placeholder="#{register.confirm_password}" />
+								<span th:if="${#fields.hasErrors('confirmPassword')}"
+									  th:errors="*{confirmPassword}"
+									  class="text-danger small"></span>
+							</div>
+						</div>
+
+						<div class="text-center">
+							<button type="submit"
+									class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+									th:text="#{register.submit}"></button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

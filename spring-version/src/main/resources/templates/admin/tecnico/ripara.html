@@ -1,0 +1,62 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+  <div class="card card-plain">
+    <div class="card-header pb-0 text-start">
+      <h4 class="font-weight-bolder" th:text="#{repairs.title.new}"></h4>
+      <p class="mb-0" th:text="#{repairs.instructions.new}"></p>
+    </div>
+    <div class="card-body card-body-fix">
+      <form th:action="@{/admin/tecnico/ripara}"
+            th:object="${riparaForm}"
+            method="post" role="form">
+        <div class="mb-3">
+          <label th:text="#{repairs.technician}"></label>
+          <span class="text-danger" th:if="${#fields.hasErrors('tecnico.idDipendente')}"
+                th:errors="*{tecnico.idDipendente}"></span>
+          <input type="hidden"
+                 name="tecnico.idDipendente"
+                 th:value="*{tecnico.idDipendente}"
+                 required readonly />
+          <input type="text"
+                 th:value="|(*{tecnico.idDipendente}) *{tecnico.profilo.nome} *{tecnico.profilo.cognome}|"
+                 class="form-control form-control-lg"
+                 required readonly />
+        </div>
+        <div class="mb-3">
+          <label th:text="#{repairs.device}"></label>
+          <span class="text-danger" th:if="${#fields.hasErrors('dispositivoDiGioco.id')}"
+                th:errors="*{dispositivoDiGioco.id}"></span>
+          <select name="dispositivoDiGioco.id"
+                  class="form-control form-control-lg"
+                  required>
+            <option th:each="dispositivo : ${dispositivi}"
+                    th:value="${dispositivo.id}"
+                    th:text="|(${dispositivo.id}) ${dispositivo.tipo}|">
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label>
+            <span th:text="#{repairs.repairCost}"></span>
+            <i class="opacity-3">(Ex: 50,00)</i>
+          </label>
+          <span class="text-danger" th:if="${#fields.hasErrors('costoRiparazione')}"
+                th:errors="*{costoRiparazione}"></span>
+          <input type="text"
+                 name="costoRiparazione"
+                 th:placeholder="#{repairs.repairCost}"
+                 class="form-control form-control-lg"
+                 required />
+        </div>
+        <div class="text-center">
+          <button type="submit"
+                  class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                  th:text="#{common.insert}">
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+    <div class="row p-4">
+        <div class="col-auto">
+            <div id="avatar" class="avatar avatar-xl position-relative" style="right: 0; left: unset;">
+                <img th:src="${fotoPath}" class="w-100 h-100 border-radius-lg shadow-sm" />
+            </div>
+        </div>
+        <div class="col-auto my-auto">
+            <div class="h-100">
+                <h5 class="mb-1" th:text="#{your_profile(${profilo.socio.numeroCliente})}"></h5>
+                <form th:action="@{/CambiaFoto}" role="form" method="post" enctype="multipart/form-data">
+                    <input type="hidden" />
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputFile" th:text="#{change_photo}"></label>
+                        <input type="file" name="file" class="form-control" id="inputFile"
+                               accept="image/jpeg" required />
+                        <button type="submit" class="btn btn-primary" th:text="#{upload}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+            <div class="nav-wrapper position-relative end-0">
+                <p class="mb-2 text-sm">
+                    <span th:text="#{score}"></span>
+                    <span class="badge badge-sm bg-gradient-info">
+                        <a class="text-uppercase text-white text-xs font-weight-bolder"
+                           th:text="${profilo.socio.punteggio}"></a>
+                    </span>
+                </p>
+                <p class="mb-2 text-sm">
+                    <span th:text="#{member_since}"></span>
+                    <span class="font-weight-bold"
+                          th:text="${profilo.socio.membroDal}"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row p-4">
+        <p class="text-uppercase text-secondary text-sm font-weight-bolder"
+           th:text="#{personal_data}"></p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" th:text="#{name}"></label>
+                    <input type="text" class="form-control" readonly
+                           th:value="${profilo.nome}" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" th:text="#{surname}"></label>
+                    <input type="text" class="form-control" readonly
+                           th:value="${profilo.cognome}" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" th:text="#{birth_date}"></label>
+                    <input type="text" class="form-control" readonly
+                           th:value="${profilo.dataDiNascita}" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" th:text="#{gender}"></label>
+                    <input type="text" class="form-control" readonly
+                           th:value="${profilo.sesso}" />
+                </div>
+            </div>
+        </div>
+        <p class="text-uppercase text-secondary text-sm font-weight-bolder"
+           th:text="#{contacts}"></p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" th:text="#{phone}"></label>
+                    <input type="text" class="form-control" readonly
+                           th:value="${profilo.telefono}" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" th:text="#{email}"></label>
+                    <input type="email" class="form-control" readonly
+                           th:value="${profilo.email}" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const avatar = document.getElementById("avatar");
+        avatar.addEventListener("click", function() {
+            const inputFile = document.getElementById("inputFile");
+            inputFile.click();
+        });
+    </script>
+</div>

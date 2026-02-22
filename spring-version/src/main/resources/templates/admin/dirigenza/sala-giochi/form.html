@@ -1,0 +1,141 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+
+    <div class="card card-plain">
+        <div class="card-header pb-0 text-start">
+            <h4 class="font-weight-bolder"
+                th:text="${modifica} ? #{gamerooms.title.mod} : #{gamerooms.title.new}"></h4>
+            <p class="mb-0"
+               th:text="${modifica} ? #{gamerooms.instructions.mod} : #{gamerooms.instructions.new}"></p>
+        </div>
+        <div class="card-body card-body-fix">
+            <form th:action="${modifica} ? @{/admin/dirigenza/sala-giochi/modifica/} + *{codice} : @{/admin/dirigenza/sala-giochi/inserisci}"
+                  th:object="${salaGiochiForm}"
+                  method="post" role="form">
+
+                <div class="mb-3" th:if="${modifica}">
+                    <h5 class="font-weight-bolder">
+                        <span th:text="#{gamerooms.room}"></span>
+                        <span class="badge badge-sm bg-gradient-info badge-padding">
+                            <span class="text-uppercase text-white text-md font-weight-bolder"
+                                  th:text="*{codice}"></span>
+                        </span>
+                    </h5>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <span class="text-uppercase text-secondary text-sm font-weight-bolder"
+                              th:text="#{gamerooms.information}"></span>
+                        <div class="row mt-3">
+                            <div class="col-lg-12 mb-3">
+                                <label th:text="#{gamerooms.name}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('nome')}"
+                                      th:errors="*{nome}"></span>
+                                <input type="text" th:field="*{nome}"
+                                       th:placeholder="#{gamerooms.name}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label th:text="#{gamerooms.capacity}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('capienza')}"
+                                      th:errors="*{capienza}"></span>
+                                <input type="number" th:field="*{capienza}"
+                                       th:placeholder="#{gamerooms.capacity}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 bl-table">
+                        <span class="text-uppercase text-secondary text-sm font-weight-bolder"
+                              th:text="#{gamerooms.hours}"></span>
+                        <div class="row mt-3">
+                            <div class="col-lg-12 mb-3">
+                                <label th:text="#{gamerooms.opening}"></label> <i class="opacity-3">(hh:mm)</i>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('orarioApertura')}"
+                                      th:errors="*{orarioApertura}"></span>
+                                <input type="time" th:field="*{orarioApertura}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label th:text="#{gamerooms.closing}"></label> <i class="opacity-3">(hh:mm)</i>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('orarioChiusura')}"
+                                      th:errors="*{orarioChiusura}"></span>
+                                <input type="time" th:field="*{orarioChiusura}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 bl-table">
+                        <span class="text-uppercase text-secondary text-sm font-weight-bolder"
+                              th:text="#{gamerooms.location}"></span>
+                        <div class="row mt-3">
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{gamerooms.street}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('indirizzo.via')}"
+                                      th:errors="*{indirizzo.via}"></span>
+                                <input type="text" th:field="*{indirizzo.via}"
+                                       th:placeholder="#{gamerooms.street}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{gamerooms.street_number}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('indirizzo.numeroCivico')}"
+                                      th:errors="*{indirizzo.numeroCivico}"></span>
+                                <input type="number" th:field="*{indirizzo.numeroCivico}"
+                                       th:placeholder="#{gamerooms.street_number}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{gamerooms.city}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('indirizzo.citta')}"
+                                      th:errors="*{indirizzo.citta}"></span>
+                                <input type="text" th:field="*{indirizzo.citta}"
+                                       th:placeholder="#{gamerooms.city}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{gamerooms.postal_code}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('indirizzo.cap')}"
+                                      th:errors="*{indirizzo.cap}"></span>
+                                <input type="number" th:field="*{indirizzo.cap}"
+                                       th:placeholder="#{gamerooms.postal_code}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{gamerooms.province}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('indirizzo.provincia')}"
+                                      th:errors="*{indirizzo.provincia}"></span>
+                                <input type="text" th:field="*{indirizzo.provincia}"
+                                       th:placeholder="#{gamerooms.province}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <label th:text="#{gamerooms.region}"></label>
+                                <span class="text-danger text-sm" th:if="${#fields.hasErrors('indirizzo.regione')}"
+                                      th:errors="*{indirizzo.regione}"></span>
+                                <input type="text" th:field="*{indirizzo.regione}"
+                                       th:placeholder="#{gamerooms.region}"
+                                       class="form-control form-control-lg" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"
+                            th:text="#{${modifica} ? common.update : common.insert}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

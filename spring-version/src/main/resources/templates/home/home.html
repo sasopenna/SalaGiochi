@@ -1,0 +1,112 @@
+<div xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      layout:fragment="content">
+    <div class="row p-5">
+        <div class="col-lg-7">
+            <h1 class="text-dark font-weight-bolder" th:text="#{home.title}"></h1>
+            <br>
+            <h4 class="text-secondary" th:utext="#{home.text}"></h4>
+            <br>
+            <h6 class="text-secondary text-light" th:utext="#{project_by}"></h6>
+        </div>
+
+        <div class="col-lg-5 p-0">
+            <img th:src="@{/assets/img/pad.jpg}" class="position-relative top-0 start-0 end-0 w-100 shadow border-radius-xl card"/>
+        </div>
+    </div>
+
+    <div class="row m-auto bg-primary bg-gradient text-center text-white">
+        <div class="col-lg-4 p-2 border-bottom-primary">
+            <h4 class="text-white" th:text="#{button.gamerooms}"></h4>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <h2 class="text-white text-normal" th:text="${sale}"></h2>
+                <i class="ni ni-building text-white text-lg opacity-10 px-2 mb-1 home-ni"></i>
+            </div>
+            <p class="text-light" th:text="#{badge.gamesroom}"></p>
+        </div>
+
+        <div class="col-lg-4 p-2 border-bottom-primary">
+            <h4 class="text-white" th:text="#{button.members}"></h4>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <h2 class="text-white text-normal" th:text="${soci}"></h2>
+                <i class="ni ni-satisfied text-white text-lg opacity-10 px-2 mb-1 home-ni"></i>
+            </div>
+            <p class="text-light" th:text="#{badge.members}"></p>
+        </div>
+
+        <div class="col-lg-4 p-2 border-bottom-primary">
+            <h4 class="text-white" th:text="#{button.gaming_devices}"></h4>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <h2 class="text-white text-normal" th:text="${ddg}"></h2>
+                <i class="ni ni-controller text-white text-lg opacity-10 px-2 mb-1 home-ni"></i>
+            </div>
+            <p class="text-light" th:text="#{badge.gaming_devices}"></p>
+        </div>
+    </div>
+
+    <div class="row m-auto p-5">
+        <div class="col-lg-10 px-4 text-center mt-1">
+            <div class="row mb-4 justify-content-center">
+                <div class="col-lg-12">
+                    <div class="card p-2 border-radius-s">
+                        <h4 class="text-dark" th:text="#{button.employees}"></h4>
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <h2 class="text-dark text-normal" th:text="${dipendenti}"></h2>
+                            <i class="ni ni-single-02 text-dark text-lg opacity-10 px-2 mb-1 home-ni"></i>
+                        </div>
+                        <p class="mb-1" th:text="#{badge.employees}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card p-2 border-radius-s">
+                        <h4 class="text-dark" th:text="#{button.managers}"></h4>
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <h2 class="text-dark text-normal" th:text="${dirigenti}"></h2>
+                            <i class="ni ni-badge text-dark text-lg opacity-10 px-2 mb-1 home-ni"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <div class="card p-2 border-radius-s">
+                        <h4 class="text-dark" th:text="#{button.cashiers}"></h4>
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <h2 class="text-dark text-normal" th:text="${cassieri}"></h2>
+                            <i class="ni ni-cart text-dark text-lg opacity-10 px-2 mb-1 home-ni"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <div class="card p-2 border-radius-s">
+                        <h4 class="text-dark" th:text="#{button.technicians}"></h4>
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <h2 class="text-dark text-normal" th:text="${tecnici}"></h2>
+                            <i class="ni ni-settings text-dark text-lg opacity-10 px-2 mb-1 home-ni"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 my-auto">
+            <div class="row">
+                <div class="col text-center mb-4 d-flex flex-column">
+                    <a href="https://www.unirc.it/" target="_blank">
+                        <img class="logo-unirc" src="https://www.unirc.it/themes/custom/unirc_base/images/logo_unirc.svg" />
+                    </a>
+                </div>
+
+                <div class="col text-center d-flex flex-column">
+                    <a href="https://www.diies.unirc.it/" target="_blank">
+                        <img class="logo-unirc" src="https://www.unirc.it/sites/default/files/2025-04/LOGO-ORO-sfumatura%20diies-eccellenza%20%282%29.svg" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

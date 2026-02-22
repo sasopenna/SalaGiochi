@@ -1,0 +1,61 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+    <div class="row row-cols-2 p-4 justify-content-between">
+        <div class="text-start">
+            <span class="badge badge-sm bg-gradient-secondary">
+                <a class="text-uppercase text-white text-xs font-weight-bolder"
+                   th:text="${lista.size()}"></a>
+            </span>
+            <b th:text="#{repairs.title}"></b>
+        </div>
+        <div class="text-end">
+            <span class="badge badge-sm bg-gradient-info">
+                <a class="text-uppercase text-white text-xxs font-weight-bolder"
+                   th:href="@{/admin/dirigenza/ripara/inserisci}"
+                   th:text="#{common.insert}"></a>
+            </span>
+        </div>
+    </div>
+
+    <div class="card-body pt-0">
+        <table class="table align-items-center mb-0 edit-table">
+            <tbody>
+            <tr>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder" th:text="#{repairs.id}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder" th:text="#{repairs.device}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder" th:text="#{repairs.technician}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder" th:text="#{repairs.repairCost}"></td>
+                <td class="text-uppercase text-secondary text-xxs font-weight-bolder text-end" th:text="#{common.operations}"></td>
+            </tr>
+
+            <tr th:each="ripara : ${lista}">
+                <td class="mb-0 text-sm" th:text="${ripara.progressivo}"></td>
+                <td class="mb-0 text-sm">
+                    <p class="text-xs mb-0 font-weight-bold" th:text="${ripara.dispositivoDiGioco.tipo}"></p>
+                    <p class="text-xxs mb-0" th:utext="#{repairs.identity(${ripara.dispositivoDiGioco.id})}"></p>
+                </td>
+                <td class="mb-0 text-sm">
+                    <p class="text-xs mb-0 font-weight-bold" th:text="${ripara.tecnico.profilo.nome + ' ' + ripara.tecnico.profilo.cognome}"></p>
+                    <p class="text-xxs mb-0" th:utext="#{repairs.identity(${ripara.tecnico.idDipendente})}"></p>
+                </td>
+                <td class="mb-0 text-xs" th:text="${ripara.costoRiparazione}"></td>
+                <td class="align-middle text-end text-sm">
+                    <a th:href="@{/admin/dirigenza/ripara/modifica/} + ${ripara.progressivo}">
+                        <span class="badge badge-sm bg-gradient-success">
+                            <i class="ni ni-ruler-pencil text-white text-sm"></i>
+                        </span>
+                    </a>
+                    <a th:href="@{/admin/dirigenza/ripara/elimina/} + ${ripara.progressivo}"
+                       th:onclick="|return confirm('[[#{repairs.confirmdelete}]]')|">
+                        <span class="badge badge-sm bg-gradient-danger">
+                            <i class="ni ni-fat-remove text-white text-sm"></i>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

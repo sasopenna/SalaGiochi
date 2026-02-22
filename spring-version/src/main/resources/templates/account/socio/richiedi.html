@@ -1,0 +1,217 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout}"
+     layout:fragment="content">
+    <div class="card card-plain">
+        <div class="card-header pb-0 text-start">
+            <h4 class="font-weight-bolder" th:text="#{text.request}"></h4>
+        </div>
+        <div class="card-body card-body-fix">
+            <form th:action="@{/account/socio/richiedi}"
+                  th:object="${richiedeForm}"
+                  method="post" role="form">
+				<span th:if="${#fields.hasErrors('cliente.numeroCliente')}"
+                      th:errors="*{cliente.numeroCliente}"
+                      class="text-danger"></span>
+                <input type="hidden"
+                       name="cliente.numeroCliente"
+                       th:value="${profilo.socio.cliente.numeroCliente}"
+                       class="form-control form-control-lg"
+                       required="required" />
+
+                <div class="mb-3">
+                    <h5 class="font-weight-bolder" th:text="#{text.gamingroom}"></h5>
+                    <select name="postazione.id.salaGiochi.codice" class="form-control form-control-lg" onchange="cambiaSala()">
+                        <option value="-1" th:text="#{choose.gamingroom}"></option>
+                        <option th:each="sala : ${sale}"
+                                th:value="${sala.codice}"
+                                th:text="${sala.nome}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <h5 class="font-weight-bolder" th:text="#{text.platform}"></h5>
+                    <select id="piattaforma" class="form-control form-control-lg" onchange="cambiaPiattaforma()">
+                        <option value="-1" th:text="#{choose.platform}"></option>
+                        <option value="PC">PC</option>
+                        <option value="Xbox">Xbox</option>
+                        <option value="PlayStation">PlayStation</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <h5 class="font-weight-bolder" th:text="#{text.duration}"></h5>
+                </div>
+                <input type="time"
+                       name="durata"
+                       value="00:00"
+                       class="form-control form-control-lg mb-3"
+                       onchange="cambiaTutto()" />
+
+                <div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+									<span class="text-dark text-lg font-weight-bolder text-nowrap"
+                                          th:text="#{checkbox.specific}"></span>
+                            </td>
+                            <td width="99%" style="padding-left: 10px;">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox" id="checkbox" class="form-check-input" onchange="cambiaTutto()" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" id="extra-text" class="text-uppercase text-secondary text-xxs font-weight-bolder"
+                                th:text="#{checkbox.random}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div id="scegli-postazione">
+                        <table class="table mb-0 table-visualizza">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="mb-3">
+                                        <span th:text="#{checkbox.station}"></span>
+                                        <select name="postazione.numero" class="form-control form-control-lg" onchange="cambiaPostazione()">
+                                            <option value="-1" th:text="#{choose.station}"></option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mb-3">
+                                        <span th:text="#{checkbox.room}"></span>
+                                        <input type="number"
+                                               name="postazione.id.stanza"
+                                               class="form-control form-control-lg"
+                                               th:placeholder="#{checkbox.room}"
+                                               readonly="true" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mb-3">
+                                        <span th:text="#{checkbox.seat}"></span>
+                                        <input type="number"
+                                               name="postazione.id.posto"
+                                               class="form-control form-control-lg"
+                                               th:placeholder="#{checkbox.seat}"
+                                               readonly="true" />
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <input type="submit"
+                       id="submit"
+                       class="btn btn-lg btn-primary btn-lg w-100 mb-0 mt-3"
+                       th:value="#{submit}" />
+            </form>
+        </div>
+    </div>
+    <script>
+        const sala = document.getElementsByName("postazione.id.salaGiochi.codice")[0];
+        const piattaforma = document.getElementById("piattaforma");
+        const orario = document.getElementsByName("durata")[0];
+        const postazione = document.getElementsByName("postazione.numero")[0];
+        const checkbox = document.getElementById("checkbox");
+        const stanza = document.getElementsByName("postazione.id.stanza")[0];
+        const posto = document.getElementsByName("postazione.id.posto")[0];
+        const submit = document.getElementById("submit");
+
+        const extraText = document.getElementById("extra-text");
+        const scegli_postazione = document.getElementById("scegli-postazione");
+
+        function cambiaSala() {
+            piattaforma.selectedIndex = 0;
+            orario.value = "00:00";
+            checkbox.checked = false;
+            cambiaTutto();
+        }
+
+        function cambiaPiattaforma() {
+            fetchJSON();
+            cambiaTutto();
+        }
+
+        function cambiaPostazione() {
+            if(postazione.selectedIndex != 0) {
+                const selezione = postazione.options[postazione.selectedIndex];
+                stanza.value = selezione.getAttribute("stanza");
+                posto.value = selezione.getAttribute("posto");
+            } else {
+                stanza.value = "";
+                posto.value = "";
+            }
+
+            submit.disabled = !checkSubmit();
+        }
+
+        function cambiaTutto() {
+            const checkBox = checkbox.checked;
+            extraText.style.display = (checkBox ? "none" : "block");
+            scegli_postazione.style.display = (checkBox ? "block" : "none");
+
+            piattaforma.disabled = true;
+            orario.disabled = true;
+            checkbox.disabled = true;
+            postazione.readonly = true;
+            submit.disabled = true;
+
+            if(sala.selectedIndex == 0) return;
+            piattaforma.disabled = false;
+
+            if(piattaforma.selectedIndex == 0) return;
+            orario.disabled = false;
+
+            if(orario.value == "00:00") return;
+            checkbox.disabled = false;
+
+            //disabilito prima di settarlo
+            postazione.readonly = !checkBox;
+            if(!checkBox) {
+                //random se checkbox è chiusa
+                const max = postazione.options.length - 1;
+                postazione.selectedIndex = Math.round(Math.random() * (max - 1)) + 1;
+            } else if(checkBox) {
+                //seleziona "Scegli una postazione"
+                postazione.selectedIndex = 0;
+            }
+
+            cambiaPostazione();
+        }
+
+        function checkSubmit() {
+            return (sala.selectedIndex != 0 && piattaforma.selectedIndex != 0 && orario.value != "00:00" && postazione.selectedIndex != 0);
+        }
+
+        async function fetchJSON() {
+            const salaGiochi = sala.options[sala.selectedIndex].value;
+            const piatt = piattaforma.options[piattaforma.selectedIndex].value;
+
+            postazione.options.length = 1;
+            postazione.selectedIndex = 0;
+
+            cambiaPostazione();
+
+            const json = await fetch('../../API/cercaPostazione/'+salaGiochi+'/'+piatt).then(r => r.json());
+            json.result.forEach(r => {
+                const o = document.createElement("option");
+                o.value = r.numero;
+                o.setAttribute("posto", r.id.posto);
+                o.setAttribute("stanza", r.id.stanza);
+                o.text = "#"+r.numero;
+                postazione.appendChild(o);
+            });
+
+            cambiaTutto();
+        }
+
+        cambiaTutto();
+    </script>
+</div>

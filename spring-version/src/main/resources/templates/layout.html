@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+    <title th:text="#{title}"></title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link th:href="@{/assets/css/nucleo-icons.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/nucleo-svg.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/argon-dashboard.css?v=2.0.4}" rel="stylesheet" id="pagestyle" />
+    <link th:href="@{/assets/css/modifiche-penna.css}" rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show bg-gray-100 dark-version">
+
+<div class="min-height-300 bg-primary position-absolute w-100"></div>
+
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4"
+       id="sidenav-main">
+
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+        <ul class="navbar-nav pt-2">
+
+            <!-- HOME -->
+            <li class="nav-item">
+                <a class="nav-link selezione selezione-sub" th:href="@{/}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-shop text-info text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.home}"></span>
+                </a>
+            </li>
+
+            <!-- STATISTICHE -->
+            <li class="nav-item">
+                <a class="nav-link selezione selezione-sub" th:href="@{/statistiche}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-chart-pie-35 text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.statistics}"></span>
+                </a>
+            </li>
+
+            <!-- DOVE SIAMO -->
+            <li class="nav-item">
+                <a class="nav-link selezione selezione-sub" th:href="@{/dove-siamo}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-square-pin text-danger text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.how_to_find_us}"></span>
+                </a>
+            </li>
+
+            <!-- ACCOUNT SECTION -->
+            <li class="nav-item mt-3"
+                th:if="(${isSocio} and ${loggato}) or !${loggato}">
+
+                <a th:if="${isSocio} and ${loggato}"
+                   th:href="@{/account/pannello}" class="d-flex flex-row">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 hover-color"
+                        th:text="#{button.account}"></h6>
+                    <i class="ni ni-bold-right text-xs opacity-6 freccia"></i>
+                </a>
+
+                <h6 th:unless="${isSocio} and ${loggato}"
+                    class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6"
+                    th:text="#{button.account}"></h6>
+            </li>
+
+            <!-- LOGIN / REGISTER -->
+            <li class="nav-item" th:if="!${loggato}">
+                <a class="nav-link selezione selezione-sub" th:href="@{/account/login}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-lock-circle-open text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.login}"></span>
+                </a>
+
+                <a class="nav-link selezione selezione-sub" th:href="@{/account/socio/registrazione}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-book-bookmark text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.register}"></span>
+                </a>
+            </li>
+
+            <!-- SOCIO MENU -->
+            <li class="nav-item" th:if="${isSocio} and ${loggato}">
+                <a class="nav-link selezione selezione-sub" th:href="@{/account/socio}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-circle-08 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.profile}"></span>
+                </a>
+            </li>
+
+            <li class="nav-item" th:if="${isSocio} and ${loggato}">
+                <a class="nav-link selezione selezione-sub" th:href="@{/account/socio/prenotazioni}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.booking}"></span>
+                </a>
+            </li>
+
+            <li class="nav-item" th:if="${isSocio} and ${loggato}">
+                <a class="nav-link selezione selezione-sub" th:href="@{/account/socio/richiedi}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.request_station}"></span>
+                </a>
+            </li>
+
+            <!-- DIPENDENTE MENU -->
+            <li class="nav-item mt-3" th:if="${isDipendente} and ${loggato}">
+                <a th:href="@{/admin/pannello}" class="d-flex flex-row">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 hover-color"
+                        th:text="#{button.administration}"></h6>
+                    <i class="ni ni-bold-right text-xs opacity-6 freccia"></i>
+                </a>
+            </li>
+
+            <!-- CASSIERE -->
+            <li class="nav-item" th:if="${isCassiere}">
+                <a class="nav-link selezione selezione-sub" th:href="@{/admin/cassiere/assegna}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{options.assignments}"></span>
+                </a>
+            </li>
+
+            <!-- TECNICO -->
+            <li class="nav-item" th:if="${isTecnico}">
+                <a class="nav-link selezione selezione-sub" th:href="@{/admin/tecnico/ripara}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-settings text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{options.fixes}"></span>
+                </a>
+            </li>
+
+            <!-- DIRIGENTE -->
+            <li class="nav-item" th:if="${isDirigente}">
+
+                <!-- SALE GIOCHI -->
+                <a class="nav-link selezione selezione-sub" th:href="@{/admin/dirigenza/sala-giochi}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-building text-info text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.gamerooms}"></span>
+                </a>
+
+                <!-- ACCOUNT -->
+                <a class="nav-link selezione selezione-sub" th:href="@{/admin/dirigenza/account}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-badge text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.account}"></span>
+                </a>
+
+                <!-- SOCI -->
+                <a class="nav-link selezione selezione-sub" th:href="@{/admin/dirigenza/socio}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-satisfied text-danger text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1" th:text="#{button.members}"></span>
+                </a>
+
+                <!-- DIPENDENTI -->
+                <div id="accordion">
+                    <div id="headingOne">
+                        <a class="nav-link selezione selezione-sub" data-bs-toggle="collapse"
+                           data-bs-target="#collapse-dipendenti" aria-controls="collapse-dipendenti">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-single-02 text-black-50 text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1" th:text="#{button.employees}"></span>
+                        </a>
+
+                        <div id="collapse-dipendenti" class="collapse" aria-labelledby="headingOne"
+                             data-bs-parent="#accordion">
+
+                            <ul class="navbar-nav padding-left">
+
+                                <li class="nav-item">
+                                    <a class="nav-link selezione selezione-sub"
+                                       th:href="@{/admin/dirigenza/dirigente}">
+                                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                        <span class="nav-link-text ms-1" th:text="#{button.managers}"></span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link selezione selezione-sub"
+                                       th:href="@{/admin/dirigenza/cassiere}">
+                                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                        <span class="nav-link-text ms-1" th:text="#{button.cashiers}"></span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link selezione selezione-sub"
+                                       th:href="@{/admin/dirigenza/tecnico}">
+                                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                        <span class="nav-link-text ms-1" th:text="#{button.technicians}"></span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DISPOSITIVI -->
+                <div id="accordion">
+                    <div id="headingOne">
+                        <a class="nav-link selezione selezione-sub" data-bs-toggle="collapse"
+                           data-bs-target="#collapse-ddg" aria-controls="collapse-ddg">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-controller text-primary text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1" th:text="#{button.gaming_devices}"></span>
+                        </a>
+
+                        <div id="collapse-ddg" class="collapse" aria-labelledby="headingOne"
+                             data-bs-parent="#accordion">
+
+                            <ul class="navbar-nav padding-left">
+
+                                <li class="nav-item">
+                                    <a class="nav-link selezione selezione-sub"
+                                       th:href="@{/admin/dirigenza/dispositivo-di-gioco}">
+                                        <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
+                                        <span class="nav-link-text ms-1" th:text="#{options.list}"></span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link selezione selezione-sub"
+                                       th:href="@{/admin/dirigenza/ripara}">
+                                        <i class="ni ni-settings text-dark text-sm opacity-10"></i>
+                                        <span class="nav-link-text ms-1" th:text="#{options.fixes}"></span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POSTAZIONI -->
+                <div id="accordion">
+                    <div id="headingOne">
+                        <a class="nav-link selezione selezione-sub" data-bs-toggle="collapse"
+                           data-bs-target="#collapse-postazioni" aria-controls="collapse-postazioni">
+                            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="ni ni-collection text-warning text-sm opacity-10"></i>
+                            </div>
+                            <span class="nav-link-text ms-1" th:text="#{button.stations}"></span>
+                        </a>
+
+                        <div id="collapse-postazioni" class="collapse" aria-labelledby="headingOne"
+                             data-bs-parent="#accordion">
+
+                            <ul class="navbar-nav padding-left">
+
+                                <li class="nav-item">
+                                    <a class="nav-link selezione selezione-sub"
+                                       th:href="@{/admin/dirigenza/postazione}">
+                                        <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
+                                        <span class="nav-link-text ms-1" th:text="#{options.list}"></span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link selezione selezione-sub"
+                                       th:href="@{/admin/dirigenza/richiede}">
+                                        <i class="ni ni-send text-dark text-sm opacity-10"></i>
+                                        <span class="nav-link-text ms-1" th:text="#{options.requests}"></span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link selezione selezione-sub"
+                                       th:href="@{/admin/dirigenza/assegna}">
+                                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                                        <span class="nav-link-text ms-1" th:text="#{options.assignments}"></span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+
+            <!-- LOGOUT -->
+            <li class="nav-item mt-3" th:if="${loggato}">
+                <a th:href="@{/account/logout}" class="d-flex flex-row">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 hover-color"
+                        th:text="#{button.logout}"></h6>
+                    <i class="ni ni-bold-right text-xs opacity-6 freccia"></i>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</aside>
+
+<main class="main-content position-relative border-radius-lg" style="overflow: unset !important">
+
+    <div class="container position-sticky z-index-sticky top-0" style="max-width: 100% !important">
+        <nav class="navbar navbar-dark navbar-expand-lg blur blur-dark border-radius-lg top-0 z-index-3 shadow position-absolute mt-3 p-0 py-2 start-0 end-0 mx-4"
+             id="navbarBlur" data-scroll="false"
+             style="box-shadow: 0 23px 45px -11px rgba(20, 20, 20, 0.25) !important;">
+
+            <div class="container-fluid p-0 px-4">
+
+                <a class="navbar-brand m-0">
+                    <img th:src="@{/assets/img/logo.jpg}" class="navbar-brand-img" style="height: 40px;" alt="main_logo">
+                    <span class="ms-1 font-weight-bold" th:text="#{title}"></span>
+                </a>
+
+                <div class="mt-sm-0 mt-2 me-md-0 z-index-3" id="navbar">
+                    <ul class="navbar-nav justify-content-end">
+
+                        <li class="nav-item d-flex align-items-center nav-link text-white font-weight-bold px-0">
+
+                            <!-- FOTO PROFILO -->
+                            <a th:if="${loggato} and ${isSocio}"
+                               th:href="@{/account/pannello}">
+                                <img th:src="${fotoPath}" class="profile-pic mini-pic shadow-sm" />
+                            </a>
+
+                            <a th:if="${loggato} and !${isSocio}"
+                               th:href="@{/admin/pannello}">
+                                <img th:src="${fotoPath}" class="profile-pic mini-pic shadow-sm" />
+                            </a>
+
+                            <i th:if="!${loggato}" class="ni ni-single-02 text-dark text-sm"></i>
+
+                            <!-- LOGIN / REGISTER -->
+                            <a th:if="!${loggato}" th:href="@{/account/login}"
+                               class="nav-link text-dark font-weight-bold hover-color">
+                                <span class="d-sm-inline d-none" th:text="#{button.login}"></span>
+                            </a>
+
+                            <a th:if="!${loggato}" th:href="@{/account/socio/registrazione}"
+                               class="nav-link text-dark font-weight-bold hover-color">
+                                <span class="d-sm-inline d-none" th:text="#{button.register}"></span>
+                            </a>
+
+                            <!-- NOME UTENTE -->
+                            <span th:if="${loggato}" class="d-sm-inline d-none">
+                            <a class="nav-link text-dark font-weight-bold hover-color"
+                               th:href="${isSocio} ? @{/account/pannello} : @{/admin/pannello}"
+                               th:text="${profilo.nome}">
+                            </a>
+                        </span>
+
+                            <!-- LOGOUT -->
+                            <span th:if="${loggato}" class="d-sm-inline d-none opacity-7">
+                            <a th:href="@{/account/logout}" class="nav-link text-black hover-color">
+                                (<span th:text="#{button.logout}"></span>)
+                            </a>
+                        </span>
+
+                            <!-- TOGGLER MOBILE -->
+                            <a class="nav-link text-dark p-0 px-2 d-xl-none" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line bg-black"></i>
+                                    <i class="sidenav-toggler-line bg-black"></i>
+                                    <i class="sidenav-toggler-line bg-black"></i>
+                                </div>
+                            </a>
+
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="container-fluid pt-7">
+        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span class="opacity-7" th:text="#{${errorMessage}}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="opacity-7" th:text="#{${successMessage}}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="card">
+            <div class="card-body p-0" layout:fragment="content">
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer pt-3">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                    <div class="copyright text-center text-sm text-muted text-lg-start">
+                        <span th:utext="#{project_by}"></span> © <script>document.write(new Date().getFullYear())</script>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                        <li class="nav-item">
+                            <a href="https://www.creative-tim.com/product/argon-dashboard"
+                               class="nav-link text-muted" target="_blank">Argon Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://www.creative-tim.com"
+                               class="nav-link text-muted" target="_blank">Creative Tim</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+</main>
+
+<!--   Core JS Files   -->
+<script th:src="@{/assets/js/core/popper.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/plugins/perfect-scrollbar.min.js}"></script>
+<script th:src="@{/assets/js/plugins/smooth-scrollbar.min.js}"></script>
+<script th:src="@{/assets/js/plugins/chartjs.min.js}"></script>
+
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+
+<!-- Control Center for Soft Dashboard -->
+<script th:src="@{/assets/js/argon-dashboard.min.js?v=2.0.4}"></script>
+
+<script>
+    /* modifiche penna */
+    const alertNodes = [...document.querySelectorAll('.alert')];
+    for (const alertNode of alertNodes) {
+        const alert = new bootstrap.Alert(alertNode);
+        setTimeout(function () { alert.close(); }, 7500);
+    }
+</script>
+
+</body>
+</html>
