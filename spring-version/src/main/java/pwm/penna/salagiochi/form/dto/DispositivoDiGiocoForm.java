@@ -3,7 +3,7 @@ package pwm.penna.salagiochi.form.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
-import pwm.penna.salagiochi.form.annotation.ddg.DispositivoDiGioco;
+import pwm.penna.salagiochi.form.annotation.DispositivoDiGioco;
 import pwm.penna.salagiochi.form.dto.base.BaseForm;
 
 import java.time.LocalDate;
@@ -20,6 +20,7 @@ public class DispositivoDiGiocoForm extends BaseForm<Integer> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataAcquisizione;
 
+    @NotBlank(message = "{validator.required}")
     private String discriminator;
 
     public Integer getId() {

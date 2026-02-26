@@ -29,9 +29,21 @@ public interface DispositivoDiGiocoMapper extends BaseMapper<DispositivoDiGioco,
     @ObjectFactory
     default DispositivoDiGioco istanza(DispositivoDiGiocoForm form) {
         return switch (form.getTipo().toUpperCase()) {
-            case "PC" -> new PC();
-            case "XBOX" -> new Xbox();
-            case "PLAYSTATION" -> new PlayStation();
+            case "PC" -> {
+                PC pc = new PC();
+                pc.setWindows(form.getDiscriminator());
+                yield pc;
+            }
+            case "XBOX" -> {
+                Xbox xbox = new Xbox();
+                xbox.setGenerazione(form.getDiscriminator());
+                yield xbox;
+            }
+            case "PLAYSTATION" -> {
+                PlayStation playStation = new PlayStation();
+                playStation.setGenerazione(form.getDiscriminator());
+                yield playStation;
+            }
             default -> throw new IllegalArgumentException("Tipo dispositivo non valido: " + form.getTipo());
         };
     }

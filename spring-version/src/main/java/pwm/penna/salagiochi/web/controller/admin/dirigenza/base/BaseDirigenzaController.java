@@ -35,6 +35,8 @@ public abstract class BaseDirigenzaController<F extends BaseForm<ID>, ID, S exte
     @PostMapping("/modifica/{pathVar}")
     public String aggiorna(Model model, @PathVariable ID pathVar, @Valid F form, BindingResult bindingResult) {
         form.setKey(pathVar);
+        formBinding(form, bindingResult);
+
         try {
             if (!bindingResult.hasErrors()) {
                 service.aggiorna(form);
@@ -49,6 +51,8 @@ public abstract class BaseDirigenzaController<F extends BaseForm<ID>, ID, S exte
 
     @PostMapping("/inserisci")
     public String crea(Model model, @Valid F form, BindingResult bindingResult) {
+        formBinding(form, bindingResult);
+
         try {
             if (!bindingResult.hasErrors()) {
                 service.crea(form);
@@ -87,8 +91,11 @@ public abstract class BaseDirigenzaController<F extends BaseForm<ID>, ID, S exte
         return "admin/dirigenza/" + getBasePath() + "/form";
     }
 
-    // Vuoto così si modifica solo se si vuole
+    // Vuoti così si modifica solo se si vuole
     protected void buildModel(Model model, ID id) {
+    }
+
+    protected void formBinding(F form, BindingResult bindingResult) {
     }
 
     public S getService() {

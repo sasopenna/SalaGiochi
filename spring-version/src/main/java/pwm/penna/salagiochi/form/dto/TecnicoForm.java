@@ -1,7 +1,7 @@
 package pwm.penna.salagiochi.form.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import pwm.penna.salagiochi.form.annotation.ddg.DispositivoDiGioco;
+import pwm.penna.salagiochi.form.annotation.DispositivoDiGioco;
 
 public class TecnicoForm extends DipendenteForm {
 
