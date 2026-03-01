@@ -2,24 +2,32 @@ package pwm.penna.salagiochi.web.base;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.FlashMapManager;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 public class FlashMessageHandler {
     protected final String SUCCESS = "successMessage";
     protected final String ERROR = "errorMessage";
 
-    protected void flashMessage(String key, String value, HttpServletRequest request) {
-        FlashMap flashMap = RequestContextUtils.getOutputFlashMap(request);
-        flashMap.put(key, value);
-    }
+    @Autowired
+    private FlashMapManager flashMapManager;
+    @Autowired
+    private HttpServletRequest httpServletRequest;
+    @Autowired
+    private HttpServletResponse httpServletResponse;
 
-    protected void flashMessage(String key, String value, HttpServletRequest request, HttpServletResponse response) {
+    private void flashMessage(String key, String value) {
         FlashMap flashMap = new FlashMap();
         flashMap.put(key, value);
+        flashMapManager.saveOutputFlashMap(flashMap, httpServletRequest, httpServletResponse);
+    }
 
-        FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
-        flashMapManager.saveOutputFlashMap(flashMap, request, response);
+    protected void successMessage(String message) {
+        flashMessage(SUCCESS, message);
+    }
+
+    protected void errorMessage(String message) {
+        flashMessage(ERROR, message);
     }
 }

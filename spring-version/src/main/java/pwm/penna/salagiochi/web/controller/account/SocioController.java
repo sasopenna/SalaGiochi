@@ -51,19 +51,16 @@ public class SocioController extends BaseController {
             bindingResult.rejectValue("confirmPassword", "validator.password_diff");
         }
 
-        if (bindingResult.hasErrors()) {
-            return "account/socio/registrazione";
-        }
-
         try {
-            setProfilo(registrazioneService.registraSocio(registraForm));
-
-            success("action.register_successfull");
-            return "redirect:/account/pannello";
+            if (!bindingResult.hasErrors()) {
+                registrazioneService.registraSocio(registraForm);
+                success("action.register_successfull");
+                return "redirect:/account/login";
+            }
         } catch (Exception e) {
             error("action.register_error");
-            return "redirect:/account/socio/registrazione";
         }
+        return "account/socio/registrazione";
     }
 
     @GetMapping("prenotazioni")

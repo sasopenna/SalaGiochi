@@ -174,8 +174,8 @@
                 </a>
 
                 <!-- DIPENDENTI -->
-                <div id="accordion">
-                    <div id="headingOne">
+                <div id="accordion-dipendenti">
+                    <div id="heading-dipendenti">
                         <a class="nav-link selezione selezione-sub" data-bs-toggle="collapse"
                            data-bs-target="#collapse-dipendenti" aria-controls="collapse-dipendenti">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -184,8 +184,8 @@
                             <span class="nav-link-text ms-1" th:text="#{button.employees}"></span>
                         </a>
 
-                        <div id="collapse-dipendenti" class="collapse" aria-labelledby="headingOne"
-                             data-bs-parent="#accordion">
+                        <div id="collapse-dipendenti" class="collapse" aria-labelledby="heading-dipendenti"
+                             data-bs-parent="#accordion-dipendenti">
 
                             <ul class="navbar-nav padding-left">
 
@@ -219,8 +219,8 @@
                 </div>
 
                 <!-- DISPOSITIVI -->
-                <div id="accordion">
-                    <div id="headingOne">
+                <div id="accordion-dispositivi">
+                    <div id="heading-dispositivi">
                         <a class="nav-link selezione selezione-sub" data-bs-toggle="collapse"
                            data-bs-target="#collapse-ddg" aria-controls="collapse-ddg">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -229,8 +229,8 @@
                             <span class="nav-link-text ms-1" th:text="#{button.gaming_devices}"></span>
                         </a>
 
-                        <div id="collapse-ddg" class="collapse" aria-labelledby="headingOne"
-                             data-bs-parent="#accordion">
+                        <div id="collapse-ddg" class="collapse" aria-labelledby="heading-dispositivi"
+                             data-bs-parent="#accordion-dispositivi">
 
                             <ul class="navbar-nav padding-left">
 
@@ -256,8 +256,8 @@
                 </div>
 
                 <!-- POSTAZIONI -->
-                <div id="accordion">
-                    <div id="headingOne">
+                <div id="accordion-postazioni">
+                    <div id="heading-postazioni">
                         <a class="nav-link selezione selezione-sub" data-bs-toggle="collapse"
                            data-bs-target="#collapse-postazioni" aria-controls="collapse-postazioni">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -266,8 +266,8 @@
                             <span class="nav-link-text ms-1" th:text="#{button.stations}"></span>
                         </a>
 
-                        <div id="collapse-postazioni" class="collapse" aria-labelledby="headingOne"
-                             data-bs-parent="#accordion">
+                        <div id="collapse-postazioni" class="collapse" aria-labelledby="heading-postazioni"
+                             data-bs-parent="#accordion-postazioni">
 
                             <ul class="navbar-nav padding-left">
 
@@ -300,15 +300,16 @@
                     </div>
                 </div>
 
-            </li>
-
             <!-- LOGOUT -->
             <li class="nav-item mt-3" th:if="${loggato}">
-                <a th:href="@{/account/logout}" class="d-flex flex-row">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 hover-color"
-                        th:text="#{button.logout}"></h6>
-                    <i class="ni ni-bold-right text-xs opacity-6 freccia"></i>
-                </a>
+                <form th:action="@{/account/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="d-flex flex-row border-0 bg-transparent p-0">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 hover-color"
+                            th:text="#{button.logout}"></h6>
+                        <i class="ni ni-bold-right text-xs opacity-6 freccia"></i>
+                    </button>
+                </form>
             </li>
 
         </ul>
@@ -368,9 +369,12 @@
 
                             <!-- LOGOUT -->
                             <span th:if="${loggato}" class="d-sm-inline d-none opacity-7">
-                            <a th:href="@{/account/logout}" class="nav-link text-black hover-color">
-                                (<span th:text="#{button.logout}"></span>)
-                            </a>
+                            <form th:action="@{/account/logout}" method="post" class="d-inline">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                <button type="submit" class="btn-link border-0 bg-transparent p-0 nav-link text-black hover-color">
+                                    (<span th:text="#{button.logout}"></span>)
+                                </button>
+                            </form>
                         </span>
 
                             <!-- TOGGLER MOBILE -->
